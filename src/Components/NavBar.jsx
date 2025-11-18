@@ -50,7 +50,7 @@ const NavBar = () => {
 
                                     <div className="space-y-4">
                                         <MyLink to={'/auth/register'} className="btn btn-outline ">Registration</MyLink>
-                                    </div> 
+                                    </div>
                                 }
 
 
@@ -71,11 +71,11 @@ const NavBar = () => {
 
                     <div className="navbar-end flex gap-2">
                         {/* theme  */}
-                        <ThemeToggle />
+
 
 
                         {user ?
-                            <div className='flex justify-center items-center'>
+                            <div className='flex justify-center gap-3 items-center'>
                                 <div className="dropdown dropdown-end ">
 
                                     <div
@@ -93,7 +93,7 @@ const NavBar = () => {
                                                 transition={{ repeat: Infinity, duration: 2.8, ease: "linear" }}
                                             >
                                                 <div className="w-12 h-12 rounded-full bg-gradient-to-tr 
-            from-yellow-400 via-pink-500 to-purple-600 p-[2px]">
+            from-blue-400 via-blue-500 to-purple-600 p-[2px]">
                                                     <div className="w-full h-full rounded-full bg-base-100"></div>
                                                 </div>
                                             </motion.div>
@@ -128,16 +128,25 @@ const NavBar = () => {
                                             </MyLink>
                                         </li>
                                         <li><MyLink to="">Joined Events</MyLink></li>
-                                        <li>
-                                            <button onClick={handleLogOut} className="flex justify-center items-center bg-green-400 text-white  hover:bg-green-500 btn btn-outline border-black transition-colors cursor-pointer "><BiLogOutCircle />LogOut</button>
-                                        </li>
+                                        <span className='m-3 '>
+                                            <ThemeToggle />
+                                        </span>
                                     </ul>
                                 </div>
+                                <button onClick={handleLogOut} className="flex justify-center items-center bg-green-400 text-white  hover:bg-green-500 btn btn-outline border-black transition-colors cursor-pointer "><BiLogOutCircle />LogOut</button>
                             </div>
 
                             :
 
-                            <MyLink to={'/auth/login'} className="flex btn-outline border-black justify-center items-center bg-green-400 text-white  hover:bg-green-500 btn transition-colors cursor-pointer "><IoMdLogIn />Login</MyLink>}
+                            <div className='flex justify-center items-center gap-3.5'>
+                                <ThemeToggle />
+                                <MyLink to={'/auth/login'} className="flex btn-outline border-black justify-center items-center bg-green-400 text-white  hover:bg-green-500 btn transition-colors cursor-pointer "><IoMdLogIn />Login</MyLink>
+                            </div>
+
+
+                        }
+
+
 
                     </div>
 

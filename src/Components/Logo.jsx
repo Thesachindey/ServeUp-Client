@@ -8,7 +8,7 @@ const Logo = () => {
             role="button"
             className="relative tooltip tooltip-bottom"
             data-tip="Serve Up - Community">
-            <Link className="logo-font flex items-center justify-center gap-1 text-xl">
+            <Link to={'/'} className="logo-font flex items-center justify-center gap-1 text-xl">
                 <GiBoomerang className='text-4xl text-green-400 ' />
                 <p className='logo-font text-2xl' >ServeUp</p>
             </Link>

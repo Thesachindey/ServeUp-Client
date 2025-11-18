@@ -116,11 +116,11 @@ const LoginPage = () => {
 
     return (
         <div>
-            <title>Gamehub - LogIn</title>
+            <title>LogIn || ServeUp</title>
             <div className='flex justify-center items-center min-h-screen'>
                 <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl py-5 ">
                     <div className="px-10 space-y-5">
-                        <h2 className='font-bold text-2xl text-center'>Login your account</h2>
+                        <h2 className='logo-font  text-2xl text-center'>Login your account</h2>
                         <hr className=' px-10 text-base-300' />
                     </div>
                     <form onSubmit={handelLogIn} className="card-body">
