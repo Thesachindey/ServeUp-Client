@@ -93,7 +93,7 @@ const NavBar = () => {
                                                 transition={{ repeat: Infinity, duration: 2.8, ease: "linear" }}
                                             >
                                                 <div className="w-12 h-12 rounded-full bg-gradient-to-tr 
-            from-blue-400 via-blue-500 to-purple-600 p-[2px]">
+            from-gray-400 via-blue-300 to-purple-300 p-[2px]">
                                                     <div className="w-full h-full rounded-full bg-base-100"></div>
                                                 </div>
                                             </motion.div>

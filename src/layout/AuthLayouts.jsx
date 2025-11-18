@@ -11,7 +11,7 @@ const AuthLayouts = () => {
                 <NavBar />
             </header>
 
-            <main className='bg-base-200 min-h-screen'>
+            <main className=' min-h-screen'>
 
                 <Container>
                     <Outlet />
