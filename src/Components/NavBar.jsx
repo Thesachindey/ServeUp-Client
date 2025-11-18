@@ -2,9 +2,30 @@ import Logo from './Logo';
 import ThemeToggle from './ThemeToggle';
 import MyLink from './MyLink';
 import Container from './Container';
+import { motion, MotionConfig } from 'framer-motion';
+import { use } from 'react';
+import { AuthContext } from '../provider/AuthProvider';
+import toast from 'react-hot-toast';
+import { IoMdLogIn } from 'react-icons/io';
+import { BiLogOutCircle } from 'react-icons/bi';
+
 
 
 const NavBar = () => {
+
+    const { user, logOut } = use(AuthContext)
+
+    const handleLogOut = () => {
+        console.log('user trying to log out')
+        logOut().then(() => {
+            // Sign-out successful.
+            toast.success("You logged out successfully!");
+        }).catch((error) => {
+            // An error
+            toast.error(error.code);
+        });
+    }
+
 
 
     return (
@@ -18,14 +39,22 @@ const NavBar = () => {
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /> </svg>
                             </div>
                             <ul
-                                tabIndex="-1"
-                                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                                <li><a>Item 1</a></li>
-                                <li>
-                                    <a>Parent</a>
 
-                                </li>
-                                <li><a>Item 3</a></li>
+                                tabIndex="-1"
+                                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow space-y-3">
+                                <MyLink to={'/'}>Homes</MyLink>
+                                <MyLink to={'/upcoming-event'}>Upcoming Events</MyLink>
+
+
+                                {!user &&
+
+                                    <div className="space-y-4">
+                                        <MyLink to={'/auth/register'} className="btn btn-outline ">Registration</MyLink>
+                                    </div> 
+                                }
+
+
+
                             </ul>
                         </div>
                         {/* logo */}
@@ -43,46 +72,78 @@ const NavBar = () => {
                     <div className="navbar-end flex gap-2">
                         {/* theme  */}
                         <ThemeToggle />
-                        <div className="dropdown dropdown-end">
-                            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                                <div className="w-10 rounded-full">
-                                    <img
-                                        alt="Tailwind CSS Navbar component"
-                                        src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+
+
+                        {user ?
+                            <div className='flex justify-center items-center'>
+                                <div className="dropdown dropdown-end ">
+
+                                    <div
+                                        tabIndex={0}
+                                        role="button"
+                                        className="relative tooltip tooltip-bottom"
+                                        data-tip={user?.displayName || 'user'}
+                                    >
+                                        <div className="relative w-14 h-14 flex items-center justify-center">
+
+
+                                            <motion.div
+                                                className="absolute flex items-center justify-center pointer-events-none"
+                                                animate={{ rotate: 360 }}
+                                                transition={{ repeat: Infinity, duration: 2.8, ease: "linear" }}
+                                            >
+                                                <div className="w-12 h-12 rounded-full bg-gradient-to-tr 
+            from-yellow-400 via-pink-500 to-purple-600 p-[2px]">
+                                                    <div className="w-full h-full rounded-full bg-base-100"></div>
+                                                </div>
+                                            </motion.div>
+
+
+                                            <div className="relative z-10 w-10 h-10 rounded-full overflow-hidden cursor-pointer">
+                                                <img
+                                                    alt={user.name}
+                                                    src={(user?.photoURL) || "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"}
+
+                                                    className="w-full h-full object-cover"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <ul
+                                        tabIndex={-1}
+                                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 space-y-2 w-52 p-2 shadow"
+                                    >
+                                        <li>
+                                            <MyLink to={'/my-profile'} className="justify-between">
+                                                My Profile
+                                                <span className="badge bg-base-300">New</span>
+                                            </MyLink>
+                                        </li>
+                                        <li><MyLink to="">Create Event</MyLink></li>
+                                        <li>
+                                            <MyLink to="">
+                                                Manage Events
+                                            </MyLink>
+                                        </li>
+                                        <li><MyLink to="">Joined Events</MyLink></li>
+                                        <li>
+                                            <button onClick={handleLogOut} className="flex justify-center items-center bg-green-400 text-white  hover:bg-green-500 btn btn-outline border-black transition-colors cursor-pointer "><BiLogOutCircle />LogOut</button>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
-                            <ul
-                                tabIndex="-1"
-                                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                                <li>
-                                    <a className="justify-between">
-                                        Profile
 
-                                    </a>
-                                </li>
-                                <li>
-                                    <MyLink to={''}>Create Event</MyLink>
-                                </li>
-                                <li>
-                                    <MyLink className="justify-between" to={''}>Manage Events  <span className="badge">New</span></MyLink>
-                                </li>
-                                <li>
-                                    <MyLink to={''}>Joined Events </MyLink>
-                                </li>
-                                <li>
-                                    <MyLink to={''}>Logout</MyLink>
-                                </li>
+                            :
 
-                            </ul>
-                        </div>
-
-                        <button className="bg-green-400 text-white  hover:bg-green-500 btn transition-colors cursor-pointer ">Login</button>
+                            <MyLink to={'/auth/login'} className="flex btn-outline border-black justify-center items-center bg-green-400 text-white  hover:bg-green-500 btn transition-colors cursor-pointer "><IoMdLogIn />Login</MyLink>}
 
                     </div>
 
                 </div>
-            </Container>
-        </div>
+            </Container >
+        </div >
     );
 };
 
