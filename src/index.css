@@ -1,2 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 @import "tailwindcss";
-@plugin "daisyui";
+
+@plugin "daisyui" {
+    themes: light --default;
+}
+
+@plugin "daisyui/theme" {
+    /* ---------------- LIGHT THEME ---------------- */
+    name: "light";
+    default: true;
+
+    --color-primary: #4ade80;       /* green-400 */
+    --color-secondary: #000000;     /* black */
+    --color-accent: #4ade80;
+
+    --color-base-100: #ffffff;      /* white */
+    --color-base-200: #f5f5f5;      /* light gray */
+    --color-base-300: #e5e5e5;      /* gray */
+
+    --color-neutral: #000000;       /* black text */
+}
+
+@plugin "daisyui/theme" {
+    /* ---------------- DARK THEME ---------------- */
+    name: "dark";
+
+    --color-primary: #4ade80;       /* green-400 */
+    --color-secondary: #ffffff;     /* white */
+    --color-accent: #4ade80;
+
+    --color-base-100: #0a0a0a;      /* deep black */
+    --color-base-200: #1a1a1a;      /* black shade */
+    --color-base-300: #2a2a2a;      /* dark gray */
+
+    --color-neutral: #ffffff;       /* white text */
+}
+
+
