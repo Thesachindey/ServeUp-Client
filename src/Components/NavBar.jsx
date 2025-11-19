@@ -113,7 +113,7 @@ const NavBar = () => {
 
                                     <ul
                                         tabIndex={-1}
-                                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 space-y-2 w-52 p-2 shadow"
+                                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-100 mt-3 space-y-2 w-52 p-2 shadow"
                                     >
                                         <li>
                                             <MyLink to={'/my-profile'} className="justify-between">

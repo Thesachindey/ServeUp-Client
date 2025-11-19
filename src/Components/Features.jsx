@@ -43,7 +43,7 @@ const Features = () => {
         transition={{ duration: 0.6, ease: "easeOut" }}
         viewport={{ once: true }}
       >
-        <h2 className="text-4xl font-bold">Our Features</h2>
+        <h2 className="logo-font text-4xl font-bold">Our Features</h2>
         <p className="text-gray-500 max-w-xl mx-auto">
           Explore powerful tools that help you create, join, and manage community service events effortlessly.
         </p>
