@@ -9,6 +9,7 @@ import NotFoundPage from "../pages/NotFoundPage";
 import PrivateRoute from "../provider/PrivateRoute";
 import MyProfilePage from "../pages/profile/MyProfilePage";
 import UpdateInfo from "../pages/profile/UpdateInfo";
+import CreateEvent from "../pages/CreateEvent/CreateEvent";
 
 export const router = createBrowserRouter([
     {
@@ -31,6 +32,15 @@ export const router = createBrowserRouter([
                     </PrivateRoute>,
 
             },
+            {
+                path: '/create-event',
+                element:
+                    <PrivateRoute>
+                        <CreateEvent />
+                    </PrivateRoute>,
+
+            },
+
             {
                 path: "/*",
                 element: <NotFoundPage />,

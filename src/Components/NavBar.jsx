@@ -63,7 +63,7 @@ const NavBar = () => {
                     </div>
                     <div className="navbar-center hidden lg:flex">
                         <ul className="menu menu-horizontal space-x-6 px-1">
-                            <MyLink to={'/'}>Homes</MyLink>
+                            <MyLink to={'/'}>Home</MyLink>
                             <MyLink to={'/upcoming-event'}>Upcoming Events</MyLink>
                         </ul>
                     </div>
@@ -121,7 +121,7 @@ const NavBar = () => {
                                                 <span className="badge bg-base-300">New</span>
                                             </MyLink>
                                         </li>
-                                        <li><MyLink to="">Create Event</MyLink></li>
+                                        <li><MyLink to={'/create-event'}>Create Event</MyLink></li>
                                         <li>
                                             <MyLink to="">
                                                 Manage Events
