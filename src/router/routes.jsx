@@ -13,6 +13,9 @@ import CreateEvent from "../pages/CreateEvent/CreateEvent";
 import LoadingPage from "../pages/LoadingPage/LoadingPage";
 import EventDetails from "../pages/EventDetails/EventDetails";
 import JoinedEvent from "../pages/JoinedEventPage/JoinedEvent";
+import ManageEvents from "../pages/MyCreatedEventsManage/ManageEvents";
+import ManageEventDetails from "../pages/EventDetails/ManageEventDetails";
+import UpdateEvent from "../pages/UpdateEvent/UpdateEvent";
 
 export const router = createBrowserRouter([
     {
@@ -40,6 +43,33 @@ export const router = createBrowserRouter([
                 element: <EventDetails />,
                 loader: ({ params }) => fetch(`http://localhost:3000/events/${params.id}`),
                 hydrateFallbackElement: <LoadingPage />
+            },
+            {
+                path: '/manage-event-details/:id',
+                element:
+                    <PrivateRoute>
+                        <ManageEventDetails />
+                    </PrivateRoute>,
+                loader: ({ params }) => fetch(`http://localhost:3000/events/${params.id}`),
+                hydrateFallbackElement: <LoadingPage />
+            },
+            {
+                path: '/update-event/:id',
+                element: 
+                <PrivateRoute>
+                    <UpdateEvent/>
+                </PrivateRoute>,
+                loader: ({ params }) => fetch(`http://localhost:3000/events/${params.id}`),
+                hydrateFallbackElement: <LoadingPage />
+            },
+            {
+                path: '/manage-events',
+                element:
+                    <PrivateRoute>
+                        <ManageEvents />
+                    </PrivateRoute>
+                // loader: ({ params }) => fetch(`http://localhost:3000/events/${params.id}`),
+                // hydrateFallbackElement: <LoadingPage />
             },
 
             {

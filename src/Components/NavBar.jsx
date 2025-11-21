@@ -148,7 +148,7 @@ const NavBar = () => {
                                         </li>
 
                                         <li>
-                                            <MyLink to="">
+                                            <MyLink to={'/manage-events'}>
                                                 <ListChecks className="inline-block w-4 h-4 mr-2" />
                                                 Manage Events
                                             </MyLink>
