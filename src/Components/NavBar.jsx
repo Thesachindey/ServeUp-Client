@@ -8,6 +8,7 @@ import { AuthContext } from '../provider/AuthProvider';
 import toast from 'react-hot-toast';
 import { IoMdLogIn } from 'react-icons/io';
 import { BiLogOutCircle } from 'react-icons/bi';
+import { Calendar, Home, ListChecks, PlusCircle, User, UserCheck } from 'lucide-react';
 
 
 
@@ -42,9 +43,15 @@ const NavBar = () => {
 
                                 tabIndex="-1"
                                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow space-y-3">
-                                <MyLink to={'/'}>Homes</MyLink>
-                                <MyLink to={'/upcoming-event'}>Upcoming Events</MyLink>
+                                <MyLink to={"/"} className="flex items-center gap-2">
+                                    <Home size={18} />
+                                    Home
+                                </MyLink>
 
+                                <MyLink to={"/upcoming-event"} className="flex items-center gap-2">
+                                    <Calendar size={18} />
+                                    Upcoming Events
+                                </MyLink>
 
                                 {!user &&
 
@@ -63,8 +70,16 @@ const NavBar = () => {
                     </div>
                     <div className="navbar-center hidden lg:flex">
                         <ul className="menu menu-horizontal space-x-6 px-1">
-                            <MyLink to={'/'}>Home</MyLink>
-                            <MyLink to={'/upcoming-event'}>Upcoming Events</MyLink>
+                            <MyLink to={"/"} className="flex items-center gap-2">
+                                <Home size={18} />
+                                Home
+                            </MyLink>
+
+                            <MyLink to={"/upcoming-event"} className="flex items-center gap-2">
+                                <Calendar size={18} />
+                                Upcoming Events
+                            </MyLink>
+
                         </ul>
                     </div>
 
@@ -113,24 +128,43 @@ const NavBar = () => {
 
                                     <ul
                                         tabIndex={-1}
-                                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-100 mt-3 space-y-2 w-52 p-2 shadow"
+                                        className="menu menu-sm dropdown-content bg-base-100 rounded-box border z-100 mt-3 space-y-2 w-52 p-2 shadow"
                                     >
                                         <li>
                                             <MyLink to={'/my-profile'} className="justify-between">
-                                                My Profile
+                                                <span className="flex items-center gap-2">
+                                                    <User className="w-4 h-4" />
+                                                    My Profile
+                                                </span>
                                                 <span className="badge bg-base-300">New</span>
                                             </MyLink>
                                         </li>
-                                        <li><MyLink to={'/create-event'}>Create Event</MyLink></li>
+
+                                        <li>
+                                            <MyLink to={'/create-event'}>
+                                                <PlusCircle className="inline-block w-4 h-4 mr-2" />
+                                                Create Event
+                                            </MyLink>
+                                        </li>
+
                                         <li>
                                             <MyLink to="">
+                                                <ListChecks className="inline-block w-4 h-4 mr-2" />
                                                 Manage Events
                                             </MyLink>
                                         </li>
-                                        <li><MyLink to="">Joined Events</MyLink></li>
-                                        <span className='m-3 '>
+
+                                        <li>
+                                            <MyLink to={'/joined-events'}>
+                                                <UserCheck className="inline-block w-4 h-4 mr-2" />
+                                                Joined Events
+                                            </MyLink>
+                                        </li>
+
+                                        <span className="m-3">
                                             <ThemeToggle />
                                         </span>
+
                                     </ul>
                                 </div>
                                 <button onClick={handleLogOut} className="flex justify-center items-center bg-green-400 text-white  hover:bg-green-500 btn btn-outline border-black transition-colors cursor-pointer "><BiLogOutCircle />LogOut</button>

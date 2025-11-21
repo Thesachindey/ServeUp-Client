@@ -10,6 +10,9 @@ import PrivateRoute from "../provider/PrivateRoute";
 import MyProfilePage from "../pages/profile/MyProfilePage";
 import UpdateInfo from "../pages/profile/UpdateInfo";
 import CreateEvent from "../pages/CreateEvent/CreateEvent";
+import LoadingPage from "../pages/LoadingPage/LoadingPage";
+import EventDetails from "../pages/EventDetails/EventDetails";
+import JoinedEvent from "../pages/JoinedEventPage/JoinedEvent";
 
 export const router = createBrowserRouter([
     {
@@ -22,8 +25,23 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/upcoming-event',
-                element: <UpcomingEvents />
+                element: <UpcomingEvents />,
+                loader: () => fetch('http://localhost:3000/events'),
+                hydrateFallbackElement: <LoadingPage />
             },
+            {
+                path: '/joined-events',
+                element: <JoinedEvent />,
+                loader: () => fetch('http://localhost:3000/joined-events'),
+                hydrateFallbackElement: <LoadingPage />
+            },
+            {
+                path: '/event-details/:id',
+                element: <EventDetails />,
+                loader: ({ params }) => fetch(`http://localhost:3000/events/${params.id}`),
+                hydrateFallbackElement: <LoadingPage />
+            },
+
             {
                 path: '/my-profile',
                 element:

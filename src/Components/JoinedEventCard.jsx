@@ -1,0 +1,85 @@
+import React from "react";
+import { motion } from "framer-motion";
+import { MapPin, CalendarDays, User2, MoveRight } from "lucide-react"; // react-icons alternative
+import { Link } from "react-router";
+// If you want react-icons instead, tell me — I’ll switch.
+
+const JoinedEventCard = ({ event }) => {
+  const {
+    _id,
+    title,
+    description,
+    eventType,
+    thumbnail,
+    location,
+    eventDate,
+    createdBy,
+    userName,
+  } = event;
+
+  return (
+
+    <motion.div
+      initial={{ opacity: 0, y: 20, scale: 0.95 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
+      whileHover={{ scale: 1.03 }}
+      className="cursor-pointer"
+    >
+      <div className="card bg-base-100 w-full h-full shadow-md hover:shadow-xl border border-gray-100 rounded-2xl overflow-hidden transition-all duration-300 relative">
+
+        {/* Thumbnail */}
+        <figure className="h-48 w-full overflow-hidden">
+          <img
+            src={thumbnail}
+            alt={title}
+            className="w-full h-full object-cover hover:scale-110 transition-all duration-500"
+          />
+        </figure>
+
+        <div className="card-body space-y-3">
+
+          {/* Title */}
+          <h2 className="card-title text-xl font-bold">
+            {title} <span className="badge bg-green-400 text-white">Joined</span>
+          </h2>
+
+          {/* Description */}
+          <p className="text-sm text-gray-600">{description}</p>
+
+          {/* Event Info */}
+          <div className="flex flex-col gap-2 text-sm mt-3 mb-8 ">
+
+            <div className="flex items-center gap-2 text-green-500 font-medium">
+              <MapPin size={18} />
+              <span>{location}</span>
+            </div>
+
+            {eventDate && (
+              <div className="flex items-center gap-2 text-blue-500">
+                <CalendarDays size={18} />
+                <span>{eventDate}</span>
+              </div>
+            )}
+
+            <div className="flex items-center gap-2 text-gray-500">
+              <User2 size={18} />
+              <span>Created By: {createdBy || "Unknown"}</span>
+            </div>
+          </div>
+
+          {/* Categories / Tags */}
+          <div className="card-actions justify-end absolute bottom-5 left-3 right-3 ">
+            <div className="badge badge-success  badge-outline py-3 px-4">
+              {eventType}
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </motion.div>
+
+  );
+};
+
+export default JoinedEventCard;

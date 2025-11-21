@@ -10,10 +10,32 @@ import { useNavigate } from "react-router";
 const CreateEvent = () => {
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
-    const [eventDate, setEventDate] = useState(null);
+    const [eventDate, setEventDate] = useState(new Date());
+
+    // validation 
+    const [title, setTitle] = useState("");
+    const [titleError, setTitleError] = useState("");
+
+    const handleTitleChange = (e) => {
+        const value = e.target.value;
+        setTitle(value);
+
+        const wordCount = value.trim().split(/\s+/).length;
+
+        if (wordCount > 10) {
+            setTitleError("Title must be 10 words or less");
+        } else {
+            setTitleError("");
+        }
+    };
 
     const handleCreateEvent = async (e) => {
         e.preventDefault();
+
+        if (titleError) {
+            toast.error("Please fix the title before submitting!");
+            return;
+        }
 
         if (!eventDate || eventDate <= new Date()) {
             toast.error("Please select a future date!", { id: "date-error" });
@@ -23,17 +45,17 @@ const CreateEvent = () => {
         const form = e.target;
 
         const newEvent = {
-            title: form.title.value,
+            title: title,
             description: form.description.value,
-            type: form.type.value,
+            eventType: form.type.value,
             thumbnail: form.thumbnail.value,
             location: form.location.value,
-            date: eventDate,
-            created_by: user.email,
+            eventDate: eventDate.toISOString().split("T")[0],
+            createdBy: user.email,
             created_at: new Date(),
         };
 
-        const res = await fetch("https://your-server-url/events", {
+        const res = await fetch("http://localhost:3000/events", {
             method: "POST",
             headers: { "content-type": "application/json" },
             body: JSON.stringify(newEvent),
@@ -43,31 +65,45 @@ const CreateEvent = () => {
 
         if (data.insertedId) {
             toast.success("Event Created Successfully!");
-            setTimeout(() => navigate("/events"), 1500);
+            navigate("/upcoming-event");
         }
     };
 
     return (
         <div className="py-12">
             <Toaster />
+            <div className="flex flex-col items-center justify-center text-center my-12 px-4 gap-2.5">
+                <h2 className=" text-4xl font-bold">Create Your Own <span className="text-green-500 logo-font">Events</span></h2>
+                <p className="text-gray-300 max-w-xl mx-auto">
+                    Host community-driven events and invite volunteers instantly.
+                </p>
+            </div>
 
             <div className="card border border-gray-200 bg-base-100 w-full max-w-md mx-auto shadow-2xl rounded-2xl">
                 <div className="card-body p-6 relative">
-                    <h2 className="  text-3xl font-bold text-center mb-6">
-                        Create New <span className="text-green-500 logo-font">Event</span>
+                    <h2 className=" font-bold  mb-6">
+                        Fill in event <span className="text-green-400 logo-font">details</span> :
                     </h2>
 
                     <form onSubmit={handleCreateEvent} className="space-y-4">
+
                         {/* Title */}
                         <div>
                             <label className="label font-medium">Event Title</label>
                             <input
                                 type="text"
                                 name="title"
+                                value={title}
+                                onChange={handleTitleChange}
                                 required
-                                className="input w-full rounded-full focus:outline-gray-300"
+                                className={`input w-full rounded-full focus:outline-gray-300 
+                                    ${titleError ? "border-red-500" : ""}`}
                                 placeholder="Enter event title"
                             />
+
+                            {titleError && (
+                                <p className="text-red-500 text-sm mt-1">{titleError}</p>
+                            )}
                         </div>
 
                         {/* Event Type */}
