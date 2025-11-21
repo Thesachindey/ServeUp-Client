@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { useLoaderData } from "react-router";
+import { Link, useLoaderData } from "react-router";
 import { motion } from "framer-motion";
 import { MapPin, CalendarDays, User2, Trash2, Pencil } from "lucide-react";
-import toast from "react-hot-toast";
+
 
 const ManageEventDetails = () => {
     const eventData = useLoaderData();
@@ -59,10 +59,10 @@ const ManageEventDetails = () => {
 
                     {/*Join Button  */}
                     <div className="flex flex-row gap-4">
-                        <button className="btn btn-outline border border-black bg-green-400 hover:bg-green-500 text-white flex items-center gap-2">
+                        <Link to={`/update-event/${event._id}`}  className="btn btn-outline border border-black bg-green-400 hover:bg-green-500 text-white flex items-center gap-2">
                             <Pencil size={18} />
                             Update Event
-                        </button>
+                        </Link>
 
                         <button className="btn btn-outline border border-black bg-green-400 hover:bg-green-500 text-white flex items-center gap-2">
                             <Trash2 size={18} />

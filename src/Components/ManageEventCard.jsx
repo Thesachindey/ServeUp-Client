@@ -1,19 +1,17 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { MapPin, CalendarDays, User2, MoveRight } from "lucide-react"; // react-icons alternative
+import { MapPin, CalendarDays, User2, MoveRight } from "lucide-react";
 import { Link } from "react-router";
-// If you want react-icons instead, tell me — I’ll switch.
+
 
 const ManageEventCard = ({ event }) => {
   const {
     _id,
     title,
-    description,
     eventType,
     thumbnail,
     location,
     eventDate,
-    createdBy,
   } = event;
 
   return (

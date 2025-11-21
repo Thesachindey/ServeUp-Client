@@ -4,7 +4,7 @@ import { AuthContext } from "../../provider/AuthProvider";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import toast, { Toaster } from "react-hot-toast";
-import { FaCalendarAlt, FaMapMarkerAlt, FaImage, FaListUl } from "react-icons/fa";
+import { Calendar, MapPin, ImageIcon, List } from "lucide-react";
 import { useNavigate } from "react-router";
 
 const CreateEvent = () => {
@@ -110,7 +110,8 @@ const CreateEvent = () => {
                         <div>
                             <label className="label font-medium">Event Type</label>
                             <div className="relative">
-                                <FaListUl className="absolute left-4 top-[13px] text-gray-500" />
+                                <List className="absolute left-4 top-[13px] text-gray-500" size={18} />
+
                                 <select
                                     defaultValue=""
                                     name="type"
@@ -151,7 +152,8 @@ const CreateEvent = () => {
                         <div>
                             <label className="label font-medium">Thumbnail URL</label>
                             <div className="relative">
-                                <FaImage className="absolute left-4 top-[13px] text-gray-500" />
+                               <ImageIcon className="absolute left-4 top-[13px] text-gray-500" size={18} />
+
                                 <input
                                     type="url"
                                     name="thumbnail"
@@ -166,7 +168,8 @@ const CreateEvent = () => {
                         <div>
                             <label className="label font-medium">Location</label>
                             <div className="relative">
-                                <FaMapMarkerAlt className="absolute left-4 top-[13px] text-gray-500" />
+                               <MapPin className="absolute left-4 top-[13px] text-gray-500" size={18} />
+
                                 <input
                                     type="text"
                                     name="location"
@@ -181,7 +184,7 @@ const CreateEvent = () => {
                         <div>
                             <label className="label font-medium">Event Date</label>
                             <div className="relative">
-                                <FaCalendarAlt className="absolute left-4 top-[13px] text-gray-500" />
+                             <Calendar className="absolute left-4 top-[13px] text-gray-500" size={18} />
 
                                 <DatePicker
                                     selected={eventDate}
