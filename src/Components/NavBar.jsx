@@ -42,7 +42,7 @@ const NavBar = () => {
                             <ul
 
                                 tabIndex="-1"
-                                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow space-y-3">
+                                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-20 mt-3 w-52 p-2 shadow space-y-3">
                                 <MyLink to={"/"} className="flex items-center gap-2">
                                     <Home size={18} />
                                     Home

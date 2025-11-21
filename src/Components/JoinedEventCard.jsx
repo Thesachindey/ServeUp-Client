@@ -45,7 +45,18 @@ const JoinedEventCard = ({ event }) => {
           </h2>
 
           {/* Description */}
-          <p className="text-sm text-gray-600">{description}</p>
+
+          <div className="text-sm text-gray-600 relative">
+            <p className="line-clamp-4">
+              {description}
+            </p>
+
+            {description?.length > 130 && (
+              <span className="absolute bottom-0 right-0">
+                ...
+              </span>
+            )}
+          </div>
 
           {/* Event Info */}
           <div className="flex flex-col gap-2 text-sm mt-3 mb-8 ">
@@ -73,7 +84,7 @@ const JoinedEventCard = ({ event }) => {
             <div className="badge badge-success  badge-outline py-3 px-4">
               {eventType}
             </div>
-            
+
           </div>
         </div>
       </div>

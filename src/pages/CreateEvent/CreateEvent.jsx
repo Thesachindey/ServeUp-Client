@@ -189,7 +189,7 @@ const CreateEvent = () => {
                                     minDate={new Date()}
                                     placeholderText="Select your event date."
                                     className="input w-full rounded-full pl-10 focus:outline-gray-300"
-                                    dateFormat="dd MMM yyyy"
+                                    dateFormat="dd MMMM yyyy"
                                     required
                                 />
                             </div>

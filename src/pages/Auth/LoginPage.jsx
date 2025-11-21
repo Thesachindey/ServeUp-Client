@@ -84,13 +84,13 @@ const LoginPage = () => {
     const handleForgetPassword = () => {
         const email = emailRef.current.value;
 
-        // 1️⃣ Check if the email field is empty
+        
         if (!email) {
             toast.error('Please enter your email first!');
             return;
         }
 
-        // 2️⃣ Send the password reset email using Firebase
+        //  Send the password reset email using Firebase
         sendPasswordResetEmailFunc(email)
             .then(() => {
                 toast.success('Password reset email sent! Check your inbox.');
@@ -98,7 +98,7 @@ const LoginPage = () => {
             .catch((error) => {
                 const errorCode = error.code;
 
-                // 3️⃣ Handle common Firebase errors with friendly messages
+                //  Handle common Firebase errors with friendly messages
                 if (errorCode === 'auth/invalid-email') {
                     toast.error('Invalid email address.');
                 } else if (errorCode === 'auth/user-not-found') {
