@@ -9,6 +9,7 @@ import toast from 'react-hot-toast';
 import { IoMdLogIn } from 'react-icons/io';
 import { BiLogOutCircle } from 'react-icons/bi';
 import { Calendar, Home, ListChecks, PlusCircle, User, UserCheck } from 'lucide-react';
+import Swal from 'sweetalert2';
 
 
 
@@ -17,15 +18,36 @@ const NavBar = () => {
     const { user, logOut } = use(AuthContext)
 
     const handleLogOut = () => {
-        console.log('user trying to log out')
-        logOut().then(() => {
-            // Sign-out successful.
-            toast.success("You logged out successfully!");
-        }).catch((error) => {
-            // An error
-            toast.error(error.code);
-        });
-    }
+    console.log("user trying to log out");
+
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You will be logged out from your account.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, log me out!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            logOut()
+                .then(() => {
+                    Swal.fire({
+                        title: "Logged Out!",
+                        text: "You have been logged out successfully.",
+                        icon: "success"
+                    });
+                })
+                .catch((error) => {
+                    Swal.fire({
+                        title: "Oops!",
+                        text: error.code,
+                        icon: "error"
+                    });
+                });
+        }
+    });
+};
 
 
 

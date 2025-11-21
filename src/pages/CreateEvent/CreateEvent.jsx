@@ -123,7 +123,7 @@ const CreateEvent = () => {
                                     </option>
                                     <option value="Cleanup">Cleanup</option>
                                     <option value="Plantation">Tree Plantation</option>
-                                    <option value="Donation">Food Donation</option>
+                                    <option value="Donation">Donation</option>
                                     <option value="Child Education">Child Education Session</option>
                                     <option value="Senior Care">Senior Care Visit</option>
                                     <option value="Health Camp">Free Health Camp</option>

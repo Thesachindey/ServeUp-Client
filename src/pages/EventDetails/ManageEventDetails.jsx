@@ -1,12 +1,45 @@
 import React, { useState } from "react";
-import { Link, useLoaderData } from "react-router";
+import { Link, useLoaderData, useNavigate } from "react-router";
 import { motion } from "framer-motion";
 import { MapPin, CalendarDays, User2, Trash2, Pencil } from "lucide-react";
+import Swal from "sweetalert2";
 
 
 const ManageEventDetails = () => {
     const eventData = useLoaderData();
     const [event, setEvent] = useState(eventData);
+const navigate = useNavigate();
+
+const handleDelete = () => {
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      fetch(`http://localhost:3000/events/${event._id}`, {
+        method: "DELETE"
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your event has been removed.",
+            icon: "success",
+          });
+
+          navigate("/manage-events");
+        })
+        .catch((err) => console.log(err));
+    }
+  });
+};
 
 
 
@@ -64,7 +97,7 @@ const ManageEventDetails = () => {
                             Update Event
                         </Link>
 
-                        <button className="btn btn-outline border border-black bg-green-400 hover:bg-green-500 text-white flex items-center gap-2">
+                        <button onClick={handleDelete} className="btn btn-outline border border-black bg-green-400 hover:bg-green-500 text-white flex items-center gap-2">
                             <Trash2 size={18} />
                             Remove Event
                         </button>

@@ -63,7 +63,7 @@ const EventDetails = () => {
       .then((data) => {
         toast.success("Successfully joined the event!");
         setAlreadyJoined(true);
-        navigate( '/joined-events');
+        navigate('/joined-events');
       })
       .catch((err) => {
         console.log(err);
