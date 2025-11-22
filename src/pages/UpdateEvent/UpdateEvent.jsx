@@ -73,6 +73,7 @@ const UpdateEvent = () => {
 
     return (
         <div className="py-12">
+             <title>Update Event</title>
             <Toaster />
 
             {/* Header */}
