@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 const NotFoundPage = () => {
     return (
         <div className="min-h-screen flex flex-col justify-center items-center bg-base-200 text-center p-20 rounded-2xl m-5">
-            <title>404 Not Found || ServeUp</title>
+            <title>404 Not Found || ServeUp </title>
             <DotLottieReact
             className='h-1/2 w-1/2'
                 src="https://lottie.host/2b65181e-d911-48cf-b7a3-d9c877251ee9/eZZqQJsFCV.lottie"
