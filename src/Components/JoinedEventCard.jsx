@@ -1,10 +1,19 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { MapPin, CalendarDays, User2, MoveRight } from "lucide-react"; // react-icons alternative
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import Swal from "sweetalert2";
 // If you want react-icons instead, tell me — I’ll switch.
 
 const JoinedEventCard = ({ event }) => {
+
+const navigate = useNavigate();
+
+
+
+
+
+
   const {
     _id,
     title,
@@ -84,7 +93,9 @@ const JoinedEventCard = ({ event }) => {
             <div className="badge badge-success  badge-outline py-3 px-4">
               {eventType}
             </div>
-
+            <button onClick={handleDelete} className="btn btn-sm bg-green-400 hover:bg-green-500 text-white border-0 flex items-center gap-2">
+              Cancel Event
+            </button>
           </div>
         </div>
       </div>

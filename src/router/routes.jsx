@@ -34,9 +34,12 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/joined-events',
-                element: <JoinedEvent />,
-                loader: () => fetch('http://localhost:3000/joined-events'),
-                hydrateFallbackElement: <LoadingPage />
+                element:
+                    <PrivateRoute>
+                        <JoinedEvent />
+                    </PrivateRoute>,
+                // loader: () => fetch('http://localhost:3000/joined-events'),
+                // hydrateFallbackElement: <LoadingPage />
             },
             {
                 path: '/event-details/:id',
@@ -55,10 +58,10 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/update-event/:id',
-                element: 
-                <PrivateRoute>
-                    <UpdateEvent/>
-                </PrivateRoute>,
+                element:
+                    <PrivateRoute>
+                        <UpdateEvent />
+                    </PrivateRoute>,
                 loader: ({ params }) => fetch(`http://localhost:3000/events/${params.id}`),
                 hydrateFallbackElement: <LoadingPage />
             },
