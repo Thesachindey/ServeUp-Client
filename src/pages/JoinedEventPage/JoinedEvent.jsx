@@ -31,7 +31,7 @@ const JoinedEvent = () => {
 
     return (
         <div>
-
+            <title>Joined Events || ServeUp</title>
             {
                 events.length == 0
                     ?

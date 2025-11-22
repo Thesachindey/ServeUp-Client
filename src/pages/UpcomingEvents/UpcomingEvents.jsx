@@ -9,6 +9,7 @@ const UpcomingEvents = () => {
 
     return (
         <div>
+                <title>Upcoming Events || ServeUp</title>
            { 
  
                 eventsData.length == 0

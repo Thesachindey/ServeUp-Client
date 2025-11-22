@@ -71,6 +71,7 @@ const CreateEvent = () => {
 
     return (
         <div className="py-12">
+             <title>Create Event || ServeUp</title>
             <Toaster />
             <div className="flex flex-col items-center justify-center text-center my-12 px-4 gap-2.5">
                 <h2 className=" text-4xl font-bold">Create Your Own <span className="text-green-500 logo-font">Events</span></h2>

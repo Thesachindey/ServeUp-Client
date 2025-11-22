@@ -7,6 +7,7 @@ import Gallery from '../../Components/Gallery';
 const Home = () => {
     return (
         <div>
+             <title>Home || ServeUp</title>
             <header>
                 <Banner />
             </header>

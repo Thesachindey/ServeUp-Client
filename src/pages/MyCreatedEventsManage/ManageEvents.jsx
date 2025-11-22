@@ -23,7 +23,7 @@ const ManageEvents = () => {
   }, [user?.email]); // only run when email changes
 
   if (loading) {
-    return <div>Please wait ... Loading...</div>;
+    return <div>Please wait ...</div>;
   }
 
 
@@ -32,7 +32,7 @@ const ManageEvents = () => {
 
   return (
     <div>
-
+      <title>Manage Events || ServeUp</title>
 
       {
 
