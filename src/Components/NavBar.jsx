@@ -112,7 +112,7 @@ const NavBar = () => {
 
 
                         {user ?
-                            <div className='flex justify-center gap-3 items-center'>
+                            <div className='flex justify-center gap-2 items-center'>
                                 <div className="dropdown dropdown-end ">
 
                                     <div
