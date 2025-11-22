@@ -1,6 +1,7 @@
 import { FaLinkedin, FaFacebook, FaTwitter } from "react-icons/fa";
 import Logo from "./Logo";
 import { FaXTwitter } from "react-icons/fa6";
+import { Github, Heart } from "lucide-react";
 
 export default function Footer() {
     return (
@@ -55,7 +56,21 @@ export default function Footer() {
 
                 <div className="flex justify-between text-xs text-neutral">
                     <p>© 2025 ServeUp. All Rights Reserved.</p>
-                    <p className="cursor-pointer hover:underline">Privacy Policy</p>
+
+                    <div className="flex items-center gap-4">
+                        <p className="cursor-pointer hover:underline">Privacy Policy</p>
+
+                        <a
+                            href="https://github.com/thesachindey"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-1 cursor-pointer hover:underline"
+                        >
+                            Developed by Thesachindey
+                            <Heart size={14} className="text-red-500" />
+                            <Github size={14} />
+                        </a>
+                    </div>
                 </div>
             </div>
         </footer>
