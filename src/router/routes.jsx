@@ -29,7 +29,7 @@ export const router = createBrowserRouter([
             {
                 path: '/upcoming-event',
                 element: <UpcomingEvents />,
-                loader: () => fetch('http://localhost:3000/events'),
+                loader: () => fetch('https://serveup-server.vercel.app/events'),
                 hydrateFallbackElement: <LoadingPage />
             },
             {
@@ -38,13 +38,13 @@ export const router = createBrowserRouter([
                     <PrivateRoute>
                         <JoinedEvent />
                     </PrivateRoute>,
-                // loader: () => fetch('http://localhost:3000/joined-events'),
+                // loader: () => fetch('https://serveup-server.vercel.app/joined-events'),
                 // hydrateFallbackElement: <LoadingPage />
             },
             {
                 path: '/event-details/:id',
                 element: <EventDetails />,
-                loader: ({ params }) => fetch(`http://localhost:3000/events/${params.id}`),
+                loader: ({ params }) => fetch(`https://serveup-server.vercel.app/events/${params.id}`),
                 hydrateFallbackElement: <LoadingPage />
             },
             {
@@ -53,7 +53,7 @@ export const router = createBrowserRouter([
                     <PrivateRoute>
                         <ManageEventDetails />
                     </PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:3000/events/${params.id}`),
+                loader: ({ params }) => fetch(`https://serveup-server.vercel.app/events/${params.id}`),
                 hydrateFallbackElement: <LoadingPage />
             },
             {
@@ -62,7 +62,7 @@ export const router = createBrowserRouter([
                     <PrivateRoute>
                         <UpdateEvent />
                     </PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:3000/events/${params.id}`),
+                loader: ({ params }) => fetch(`https://serveup-server.vercel.app/events/${params.id}`),
                 hydrateFallbackElement: <LoadingPage />
             },
             {
@@ -71,7 +71,7 @@ export const router = createBrowserRouter([
                     <PrivateRoute>
                         <ManageEvents />
                     </PrivateRoute>
-                // loader: ({ params }) => fetch(`http://localhost:3000/events/${params.id}`),
+                // loader: ({ params }) => fetch(`https://serveup-server.vercel.app/events/${params.id}`),
                 // hydrateFallbackElement: <LoadingPage />
             },
 

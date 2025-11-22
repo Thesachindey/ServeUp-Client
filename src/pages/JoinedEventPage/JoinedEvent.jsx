@@ -6,26 +6,26 @@ import { AuthContext } from '../../provider/AuthProvider';
 const JoinedEvent = () => {
 
     const { user } = use(AuthContext);
-      const [events, setEvents] = useState([]);
-      const [loading, setLoading] = useState(true);
-    
-      useEffect(() => {
+    const [events, setEvents] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
         if (!user?.email) return;
-    
+
         //   setLoading(true);
-    
-        fetch(`http://localhost:3000/my-joined-events?email=${user.email}`)
-          .then((res) => res.json())
-          .then((data) => {
-            setEvents(data);
-            setLoading(false);
-          })
-          .catch(() => setLoading(false)); // optional safety
-      }, [user?.email]); // only run when email changes
-    
-      if (loading) {
+
+        fetch(`https://serveup-server.vercel.app/my-joined-events?email=${user.email}`)
+            .then((res) => res.json())
+            .then((data) => {
+                setEvents(data);
+                setLoading(false);
+            })
+            .catch(() => setLoading(false)); // optional safety
+    }, [user?.email]); // only run when email changes
+
+    if (loading) {
         return <div>Please wait ... Loading...</div>;
-      }
+    }
 
 
 

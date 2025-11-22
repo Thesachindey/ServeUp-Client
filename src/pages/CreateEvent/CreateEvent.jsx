@@ -55,7 +55,7 @@ const CreateEvent = () => {
             created_at: new Date(),
         };
 
-        const res = await fetch("http://localhost:3000/events", {
+        const res = await fetch("https://serveup-server.vercel.app/events", {
             method: "POST",
             headers: { "content-type": "application/json" },
             body: JSON.stringify(newEvent),
@@ -152,7 +152,7 @@ const CreateEvent = () => {
                         <div>
                             <label className="label font-medium">Thumbnail URL</label>
                             <div className="relative">
-                               <ImageIcon className="absolute left-4 top-[13px] text-gray-500" size={18} />
+                                <ImageIcon className="absolute left-4 top-[13px] text-gray-500" size={18} />
 
                                 <input
                                     type="url"
@@ -168,7 +168,7 @@ const CreateEvent = () => {
                         <div>
                             <label className="label font-medium">Location</label>
                             <div className="relative">
-                               <MapPin className="absolute left-4 top-[13px] text-gray-500" size={18} />
+                                <MapPin className="absolute left-4 top-[13px] text-gray-500" size={18} />
 
                                 <input
                                     type="text"
@@ -184,7 +184,7 @@ const CreateEvent = () => {
                         <div>
                             <label className="label font-medium">Event Date</label>
                             <div className="relative">
-                             <Calendar className="absolute left-4 top-[13px] text-gray-500" size={18} />
+                                <Calendar className="absolute left-4 top-[13px] text-gray-500" size={18} />
 
                                 <DatePicker
                                     selected={eventDate}

@@ -23,7 +23,7 @@ const UpdateEvent = () => {
     };
 
 
-const handleCreateEvent = async (e) => {
+    const handleCreateEvent = async (e) => {
         e.preventDefault();
 
         if (titleError) {
@@ -47,22 +47,22 @@ const handleCreateEvent = async (e) => {
             eventDate: eventDate.toISOString().split("T")[0],
         };
 
-         fetch(`http://localhost:3000/events/${event._id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newEvent),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        toast.success("Successfully updated!");
-        navigate(`/manage-event-details/${event._id}`);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+        fetch(`https://serveup-server.vercel.app/events/${event._id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newEvent),
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+                toast.success("Successfully updated!");
+                navigate(`/manage-event-details/${event._id}`);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     };
 
 

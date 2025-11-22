@@ -23,9 +23,10 @@ export default function Footer() {
                         <div className="space-y-2 text-sm">
                             <p className="font-semibold">Contact us:</p>
                             <p>Email: info@serveup.com</p>
-                            <p>Phone: +555-567-8901</p>
-                            <p>Address: 1234 Main St, Moonstone City, Stardust State 12345</p>
+                            <p>Phone: +880-1777-000000</p>
+                            <p>Address: House 12, Road 5, Mirpur DOHS, Dhaka 1216, Bangladesh</p>
                         </div>
+
                     </div>
 
                     {/* Right Section */}
@@ -35,7 +36,7 @@ export default function Footer() {
                             <FaXTwitter className="cursor-pointer " />
                             <FaFacebook className="cursor-pointer hover:text-blue-500" />
                         </div>
-                            <h6 className="footer-title">Newsletter</h6>
+                        <h6 className="footer-title">Newsletter</h6>
                         <div className="bg-base-200 p-6 rounded-xl flex flex-col gap-4 md:flex-row md:items-center">
                             <input
                                 type="email"

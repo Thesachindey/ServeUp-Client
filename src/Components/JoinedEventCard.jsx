@@ -7,38 +7,38 @@ import Swal from "sweetalert2";
 
 const JoinedEventCard = ({ event }) => {
 
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
-const handleDelete = () => {
-  Swal.fire({
-    title: "Are you sure?",
-    text: "You won't be able to revert this!",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
-    confirmButtonText: "Yes, delete it!",
-  }).then((result) => {
-    if (result.isConfirmed) {
-      fetch(`http://localhost:3000/joined-events/${event._id}`, {
-        method: "DELETE"
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-
-          Swal.fire({
-            title: "Deleted!",
-            text: "Your event has been removed.",
-            icon: "success",
-          });
-
-          navigate("/joined-events");
+  const handleDelete = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, cancel it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`https://serveup-server.vercel.app/joined-events/${event._id}`, {
+          method: "DELETE"
         })
-        .catch((err) => console.log(err));
-    }
-  });
-};
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+
+            Swal.fire({
+              title: "Cancelled!",
+              text: "Your event has been cancelled.",
+              icon: "success",
+            });
+
+            navigate("/upcoming-event");
+          })
+          .catch((err) => console.log(err));
+      }
+    });
+  };
 
 
 
@@ -118,7 +118,7 @@ const handleDelete = () => {
           </div>
 
           {/* Categories / Tags */}
-          <div className="card-actions justify-end absolute bottom-5 left-3 right-3 ">
+          <div className="card-actions justify-between absolute bottom-5 left-3 right-3 ">
             <div className="badge badge-success  badge-outline py-3 px-4">
               {eventType}
             </div>

@@ -8,38 +8,38 @@ import Swal from "sweetalert2";
 const ManageEventDetails = () => {
     const eventData = useLoaderData();
     const [event, setEvent] = useState(eventData);
-const navigate = useNavigate();
+    const navigate = useNavigate();
 
-const handleDelete = () => {
-  Swal.fire({
-    title: "Are you sure?",
-    text: "You won't be able to revert this!",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
-    confirmButtonText: "Yes, delete it!",
-  }).then((result) => {
-    if (result.isConfirmed) {
-      fetch(`http://localhost:3000/events/${event._id}`, {
-        method: "DELETE"
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
+    const handleDelete = () => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`https://serveup-server.vercel.app/events/${event._id}`, {
+                    method: "DELETE"
+                })
+                    .then((res) => res.json())
+                    .then((data) => {
+                        console.log(data);
 
-          Swal.fire({
-            title: "Deleted!",
-            text: "Your event has been removed.",
-            icon: "success",
-          });
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "Your event has been removed.",
+                            icon: "success",
+                        });
 
-          navigate("/manage-events");
-        })
-        .catch((err) => console.log(err));
-    }
-  });
-};
+                        navigate("/manage-events");
+                    })
+                    .catch((err) => console.log(err));
+            }
+        });
+    };
 
 
 
@@ -92,7 +92,7 @@ const handleDelete = () => {
 
                     {/*Join Button  */}
                     <div className="flex flex-row gap-4">
-                        <Link to={`/update-event/${event._id}`}  className="btn btn-outline border border-black bg-green-400 hover:bg-green-500 text-white flex items-center gap-2">
+                        <Link to={`/update-event/${event._id}`} className="btn btn-outline border border-black bg-green-400 hover:bg-green-500 text-white flex items-center gap-2">
                             <Pencil size={18} />
                             Update Event
                         </Link>

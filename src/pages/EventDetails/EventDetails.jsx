@@ -18,7 +18,7 @@ const EventDetails = () => {
   useEffect(() => {
     if (!user) return;
 
-    fetch(`http://localhost:3000/joined-events/check?eventId=${id}&email=${user.email}`)
+    fetch(`https://serveup-server.vercel.app/joined-events/check?eventId=${id}&email=${user.email}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.joined) {
@@ -54,7 +54,7 @@ const EventDetails = () => {
       joinedAt: new Date(),
     };
 
-    fetch(`http://localhost:3000/joined-events`, {
+    fetch(`https://serveup-server.vercel.app/joined-events`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(joinData),
