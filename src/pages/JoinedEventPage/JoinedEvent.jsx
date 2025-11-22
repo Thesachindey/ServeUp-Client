@@ -24,7 +24,7 @@ const JoinedEvent = () => {
     }, [user?.email]); // only run when email changes
 
     if (loading) {
-        return <div>Please wait ... Loading...</div>;
+        return <div>Loading...</div>;
     }
 
 
