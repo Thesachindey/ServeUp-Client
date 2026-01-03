@@ -2,6 +2,7 @@ import { FaLinkedin, FaFacebook, FaTwitter } from "react-icons/fa";
 import Logo from "./Logo";
 import { FaXTwitter } from "react-icons/fa6";
 import { Github, Heart } from "lucide-react";
+import { Link } from "react-router";
 
 export default function Footer() {
     return (
@@ -14,11 +15,18 @@ export default function Footer() {
                         <h1 className="text-2xl font-semibold"><Logo /></h1>
 
                         <ul className="flex gap-6 text-sm">
-                            <li className="cursor-pointer hover:underline">About us</li>
-                            <li className="cursor-pointer hover:underline">Services</li>
-                            <li className="cursor-pointer hover:underline">Use Cases</li>
-                            <li className="cursor-pointer hover:underline">Pricing</li>
-                            <li className="cursor-pointer hover:underline">Blog</li>
+                            <Link to={'/'} className="cursor-pointer hover:underline">Home</Link>
+                            <Link to={'/faq'} className="cursor-pointer hover:underline">FAQ</Link>
+
+                            <Link to={'/about-us'} className="cursor-pointer hover:underline">About us</Link>
+                            <Link to="/upcoming-event" className="cursor-pointer hover:underline">
+                                Find Events
+                            </Link>
+
+                            <Link to="/create-event" className="cursor-pointer hover:underline">
+                                Organize an Event
+                            </Link>
+
                         </ul>
 
                         <div className="space-y-2 text-sm">
@@ -33,9 +41,20 @@ export default function Footer() {
                     {/* Right Section */}
                     <div className="w-full md:w-1/2 space-y-6">
                         <div className="flex gap-4 justify-end text-xl">
-                            <FaLinkedin className="cursor-pointer hover:text-blue-500" />
-                            <FaXTwitter className="cursor-pointer " />
-                            <FaFacebook className="cursor-pointer hover:text-blue-500" />
+                            <div className="flex gap-4">
+                                {/* LinkedIn */}
+                                <a
+                                    href="https://www.linkedin.com/in/thesachindey"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label="LinkedIn"
+                                >
+                                    <FaLinkedin className="cursor-pointer hover:text-blue-600 transition-colors text-xl" />
+                                </a>
+
+
+
+                            </div>
                         </div>
                         <h6 className="footer-title">Newsletter</h6>
                         <div className="bg-base-200 p-6 rounded-xl flex flex-col gap-4 md:flex-row md:items-center">

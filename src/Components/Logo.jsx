@@ -6,7 +6,7 @@ const Logo = () => {
     return (
         <div tabIndex={0}
             role="button"
-            className="relative tooltip tooltip-bottom"
+            className="relative tooltip tooltip-primary tooltip-bottom"
             data-tip="Serve Up - Community">
             <Link to={'/'} className="logo-font flex items-center justify-center gap-1 text-xl">
                 <GiBoomerang className='text-4xl text-green-400 ' />

@@ -2,6 +2,7 @@ import React, { use, useEffect, useState } from 'react';
 import { AuthContext } from '../../provider/AuthProvider';
 import ManageEventCard from '../../Components/ManageEventCard';
 import { Link } from 'react-router';
+import LoadingPage from '../LoadingPage/LoadingPage';
 
 const ManageEvents = () => {
   const { user } = use(AuthContext);
@@ -23,7 +24,7 @@ const ManageEvents = () => {
   }, [user?.email]); // only run when email changes
 
   if (loading) {
-    return <div>Please wait ...</div>;
+    return <LoadingPage />;
   }
 
 

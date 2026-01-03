@@ -1,8 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { MapPin, CalendarDays, User2, MoveRight } from "lucide-react"; // react-icons alternative
+import { MapPin, CalendarDays, User2, MoveRight } from "lucide-react"; 
 import { Link } from "react-router";
-// If you want react-icons instead, tell me — I’ll switch.
+
 
 const EventCard = ({ event }) => {
   const {
@@ -62,8 +62,6 @@ const EventCard = ({ event }) => {
             )}
 
             <div className="flex items-center gap-2 text-gray-500">
-              {/* <User2 size={18} /> */}
-              {/* <span>By {createdBy || "Unknown"}</span> */}
             </div>
           </div>
 

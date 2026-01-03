@@ -8,46 +8,87 @@ import { AuthContext } from '../provider/AuthProvider';
 import toast from 'react-hot-toast';
 import { IoMdLogIn } from 'react-icons/io';
 import { BiLogOutCircle } from 'react-icons/bi';
-import { Calendar, Home, ListChecks, PlusCircle, User, UserCheck } from 'lucide-react';
+import { Calendar, Home, InfoIcon, ListChecks, PlusCircle, User, UserCheck } from 'lucide-react';
 import Swal from 'sweetalert2';
 
 
 
 const NavBar = () => {
-
     const { user, logOut } = use(AuthContext)
+    const links = <>
+        <MyLink
+            to="/"
+            className="flex items-center gap-1"
+        // data-tip="Home"
+        >
+            <Home size={18} />
+            Home
+        </MyLink>
+
+        <MyLink
+            to="/upcoming-event"
+            className="flex items-center gap-1 "
+        // data-tip="Upcoming Events"
+        >
+            <Calendar size={18} />
+            Upcoming Events
+        </MyLink>
+        <MyLink
+            to="/about-us"
+            className="flex items-center gap-1 "
+        >
+            <InfoIcon size={18} />
+            About Us
+        </MyLink>
+
+        {
+            user &&
+            <>
+                <MyLink to={'/create-event'}>
+                    <PlusCircle className="inline-block w-4 h-4 mr-2" />
+                    Create Event
+                </MyLink>
+                <MyLink to={'/manage-events'}>
+                    <ListChecks className="inline-block w-4 h-4 mr-2" />
+                    Manage Events
+                </MyLink>
+            </>
+        }
+
+    </>
+
 
     const handleLogOut = () => {
-    console.log("user trying to log out");
+        console.log("user trying to log out");
 
-    Swal.fire({
-        title: "Are you sure?",
-        text: "You will be logged out from your account.",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, log me out!"
-    }).then((result) => {
-        if (result.isConfirmed) {
-            logOut()
-                .then(() => {
-                    Swal.fire({
-                        title: "Logged Out!",
-                        text: "You have been logged out successfully.",
-                        icon: "success"
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You will be logged out from your account.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, log me out!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                logOut()
+                    .then(() => {
+                        Swal.fire({
+                            title: "Logged Out!",
+                            text: "You have been logged out successfully.",
+                            icon: "success"
+                        });
+                    })
+                    .catch((error) => {
+                        Swal.fire({
+                            title: "Oops!",
+                            text: error.code,
+                            icon: "error"
+                        });
                     });
-                })
-                .catch((error) => {
-                    Swal.fire({
-                        title: "Oops!",
-                        text: error.code,
-                        icon: "error"
-                    });
-                });
-        }
-    });
-};
+            }
+        });
+    };
 
 
 
@@ -57,23 +98,16 @@ const NavBar = () => {
                 <div className="navbar ">
 
                     <div className="navbar-start">
-                        <div className="dropdown">
+                        <div className="dropdown ">
                             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /> </svg>
                             </div>
                             <ul
 
                                 tabIndex="-1"
-                                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-20 mt-3 w-52 p-2 shadow space-y-3">
-                                <MyLink to={"/"} className="flex items-center gap-2">
-                                    <Home size={18} />
-                                    Home
-                                </MyLink>
+                                className="menu menu-sm dropdown-content bg-base-200 rounded-box z-20 mt-3 w-52 p-2 shadow space-y-3">
 
-                                <MyLink to={"/upcoming-event"} className="flex items-center gap-2">
-                                    <Calendar size={18} />
-                                    Upcoming Events
-                                </MyLink>
+                               {links}
 
                                 {!user &&
 
@@ -92,16 +126,7 @@ const NavBar = () => {
                     </div>
                     <div className="navbar-center hidden lg:flex">
                         <ul className="menu menu-horizontal space-x-6 px-1">
-                            <MyLink to={"/"} className="flex items-center gap-2">
-                                <Home size={18} />
-                                Home
-                            </MyLink>
-
-                            <MyLink to={"/upcoming-event"} className="flex items-center gap-2">
-                                <Calendar size={18} />
-                                Upcoming Events
-                            </MyLink>
-
+                            {links}
                         </ul>
                     </div>
 
@@ -118,7 +143,7 @@ const NavBar = () => {
                                     <div
                                         tabIndex={0}
                                         role="button"
-                                        className="relative tooltip tooltip-bottom"
+                                        className="relative tooltip tooltip-primary tooltip-bottom"
                                         data-tip={user?.displayName || 'user'}
                                     >
                                         <div className="relative w-14 h-14 flex items-center justify-center">
@@ -162,19 +187,19 @@ const NavBar = () => {
                                             </MyLink>
                                         </li>
 
-                                        <li>
+                                        {/* <li>
                                             <MyLink to={'/create-event'}>
                                                 <PlusCircle className="inline-block w-4 h-4 mr-2" />
                                                 Create Event
                                             </MyLink>
-                                        </li>
+                                        </li> */}
 
-                                        <li>
+                                        {/* <li>
                                             <MyLink to={'/manage-events'}>
                                                 <ListChecks className="inline-block w-4 h-4 mr-2" />
                                                 Manage Events
                                             </MyLink>
-                                        </li>
+                                        </li> */}
 
                                         <li>
                                             <MyLink to={'/joined-events'}>

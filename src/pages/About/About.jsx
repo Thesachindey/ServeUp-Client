@@ -1,89 +1,115 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-export default function About() {
+export default function AboutUs() {
     const tabs = ["Story", "Mission", "Impact", "Team & System"];
     const [active, setActive] = React.useState("Story");
 
     const content = {
         Story: (
-            <div className="space-y-4">
+            <div className="space-y-4 font-[Inter]">
                 <p>
-                    ServeUp was born from a simple realization: while there are countless people willing to help 
-                    and make a difference, finding organized opportunities to do so is often difficult.
-                    Social initiatives are frequently scattered across social media or lost in word-of-mouth.
+                    ServeUp started with a simple observation: our communities are full of people who want to do good—
+                    whether it's cleaning up a local park in <span className="text-primary font-semibold">Mirpur</span> or planting trees in <span className="text-primary font-semibold">Kishoreganj</span>.
                 </p>
                 <p>
-                    We wanted to build a centralized hub where anyone can become an organizer or a volunteer. 
-                    Whether it's a beach cleanup, a food drive, or an educational workshop, ServeUp simplifies the process.
+                    However, social initiatives often get lost in social media feeds or scattered group chats.
+                    We realized that for social development to be effective, it needs to be organized.
                 </p>
                 <p>
-                    By combining community spirit with modern technology, we are making volunteering accessible, 
-                    organized, and efficient for everyone.
+                    ServeUp was built to be that digital bridge, transforming scattered individual intentions
+                    into powerful, collective community action.
                 </p>
             </div>
         ),
 
         Mission: (
-            <p className="text-base md:text-lg leading-relaxed">
-                Our mission is to democratize community service. We aim to bridge the gap between 
-                individuals who want to help and the local causes that need them. We focus on fostering 
-                a culture of active citizenship by providing a platform that is transparent, 
-                easy to use, and encourages meaningful connections within the community.
+            <p className="text-base md:text-lg leading-relaxed font-[Inter]">
+                Our mission is to <span className="text-primary font-bold">democratize social service</span>.
+                We envision a society where organizing a community cleanup or a donation drive is as easy as ordering food online.
+                We aim to remove technological barriers so volunteers can focus on <strong>helping people</strong> rather than managing logistics.
             </p>
         ),
 
         Impact: (
-            <p className="text-base md:text-lg leading-relaxed">
-                Every event created on ServeUp represents a step towards a better society. 
-                By allowing users to create, track, and join activities, we ensure that volunteer efforts 
-                are not just moments in time, but part of a larger movement. Better organization leads 
-                to higher turnout, and higher turnout creates tangible, lasting change in our neighborhoods.
+            <p className="text-base md:text-lg leading-relaxed font-[Inter]">
+                By connecting enthusiastic volunteers with local needs, ServeUp amplifies the impact of every event.
+                Every <span className="badge badge-primary badge-outline mx-1">Join</span> click represents a cleaner street,
+                a planted tree, or a helped family. We are tracking not just events, but the tangible improvement of our local surroundings.
             </p>
         ),
 
         "Team & System": (
-            <p className="text-base md:text-lg leading-relaxed">
-                ServeUp is built with performance and user experience in mind, utilizing React 19, 
-                Firebase Authentication, and Tailwind CSS. The system ensures secure access, smooth animations, 
-                and reliable event tracking. Developed by <strong>The Sachin Dey</strong>, the platform is designed 
-                to be scalable and community-focused, ensuring technology serves humanity.
-            </p>
+            <div className="text-base md:text-lg leading-relaxed font-[Inter]">
+                <p className="mb-4">
+                    ServeUp is a modern Single Page Application (SPA) built for speed and reliability.
+                </p>
+                <div className="flex flex-wrap gap-2 mb-4">
+                    <span className="badge badge-primary ">React 19</span>
+                    <span className="badge badge-primary">Firebase</span>
+                    <span className="badge badge-primary">Tailwind v4</span>
+                    <span className="badge badge-primary ">Framer Motion</span>
+                </div>
+                <p>
+                    Developed by: <strong className="text-primary text-xl">Thesachindey</strong>
+                    <br />
+                    This project is a testament to how technology can be leveraged to solve real-world social challenges.
+                </p>
+            </div>
         ),
     };
 
     return (
-        <div className="p-6 lg:p-12 bg-base-200 text-base-content rounded-3xl shadow mt-10">
-            <title>About Us</title>
-            <h1 className="text-4xl font-bold mb-3">About Us</h1>
-            <p className="text-sm mb-8 text-gray-600">
-                A community-driven platform connecting volunteers with impactful social service events 
-                in their local areas.
-            </p>
+        <div className="w-full  mx-auto mt-16 px-4">
+            {/* Main Container - Uses base-200 for subtle contrast against the main page */}
+            <div className="bg-base-200 rounded-3xl p-6 lg:p-12 border border-base-300 shadow-sm">
 
-            <div className="border-t-2 border-dashed border-secondary/40 mb-8"></div>
+                {/* Header Section */}
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
+                    <div>
+                        {/* Assuming Momo Trust Display is your header font, otherwise falls back to sans */}
+                        <h1 className="text-5xl font-bold mb-2 text-neutral" >
+                            About <span className="text-primary logo-font">ServeUp</span>
+                        </h1>
+                        <p className="text-sm md:text-base text-neutral/70 font-[Inter] max-w-md">
+                            Connecting communities for social good. Create, join, and track local impact events.
+                        </p>
+                    </div>
+                    {/* Decorative boomerang icon if you want it here, or just a visual element */}
+                    <div className="hidden md:block w-16 h-1 bg-primary rounded-full mb-2"></div>
+                </div>
 
-            <div className="tabs tabs-bordered mb-6">
-                {tabs.map((tab) => (
-                    <a
-                        key={tab}
-                        className={`tab ${active === tab ? "tab-active" : ""} text-xl transition-all duration-300`}
-                        onClick={() => setActive(tab)}
-                    >
-                        {tab}
-                    </a>
-                ))}
+                {/* Custom Tabs */}
+                <div className="flex flex-wrap gap-2 mb-8 border-b border-base-300 pb-1">
+                    {tabs.map((tab) => (
+                        <button
+                            key={tab}
+                            onClick={() => setActive(tab)}
+                            className={`
+                                relative px-4 py-2 text-lg font-medium transition-all duration-300 rounded-t-lg
+                                ${active === tab
+                                    ? "text-primary border-b-2 border-primary bg-base-100"
+                                    : "text-neutral/60 hover:text-neutral hover:bg-base-300/50"
+                                }
+                            `}
+                        >
+                            {tab}
+                        </button>
+                    ))}
+                </div>
+
+                {/* Content Area - Uses base-100 (white/black) to pop against the base-200 container */}
+                <motion.div
+                    key={active}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.3 }}
+                    className="bg-base-100 p-6 md:p-8 rounded-2xl border border-base-300 shadow-sm min-h-[200px]"
+                >
+                    {content[active]}
+                </motion.div>
             </div>
-
-            <motion.div
-                key={active}
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.25 }}
-                className="min-h-[150px]"
-            >
-                {content[active]}
-            </motion.div>
         </div>
     );
 }
