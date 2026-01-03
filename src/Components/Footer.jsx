@@ -1,93 +1,91 @@
-import { FaLinkedin, FaFacebook, FaTwitter } from "react-icons/fa";
+import { FaLinkedin } from "react-icons/fa";
+import { Github, Heart, MapPin, Phone, Mail } from "lucide-react";
+import { Link } from "react-router"; 
 import Logo from "./Logo";
-import { FaXTwitter } from "react-icons/fa6";
-import { Github, Heart } from "lucide-react";
-import { Link } from "react-router";
 
 export default function Footer() {
     return (
-        <footer className="w-full shadow border-t-1 text-neutral px-6 py-10 mt-10">
-            <div className="max-w-7xl mx-auto">
+        <footer className="w-full border-t border-base-300 bg-base-100 text-base-content pt-16 pb-8 mt-10">
+            <div className="max-w-7xl mx-auto px-6">
 
-                <div className="flex flex-col md:flex-row justify-between gap-10">
-                    {/* Left Section */}
-                    <div className="space-y-6 w-full md:w-1/2">
-                        <h1 className="text-2xl font-semibold"><Logo /></h1>
-
-                        <ul className="flex gap-6 text-sm">
-                            <Link to={'/'} className="cursor-pointer hover:underline">Home</Link>
-                            <Link to={'/faq'} className="cursor-pointer hover:underline">FAQ</Link>
-
-                            <Link to={'/about-us'} className="cursor-pointer hover:underline">About us</Link>
-                            <Link to="/upcoming-event" className="cursor-pointer hover:underline">
-                                Find Events
-                            </Link>
-
-                            <Link to="/create-event" className="cursor-pointer hover:underline">
-                                Organize an Event
-                            </Link>
-
-                        </ul>
-
-                        <div className="space-y-2 text-sm">
-                            <p className="font-semibold">Contact us:</p>
-                            <p>Email: info@serveup.com</p>
-                            <p>Phone: +880-1777-000000</p>
-                            <p>Address: House 12, Road 5, Mirpur DOHS, Dhaka 1216, Bangladesh</p>
+                {/* Main Grid: Split into 3 equal columns for better balance */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+                    
+                    {/* Column 1: Brand Identity & Social */}
+                    <div className="space-y-4">
+                        <div className="mb-2">
+                            <Logo />
                         </div>
-
+                        <p className="text-sm text-base-content/70 leading-relaxed max-w-xs">
+                            Empowering communities through collective action. Join us to make a difference, one event at a time.
+                        </p>
+                        
+                        {/* Social Icons moved here - fits better with brand */}
+                        <div className="pt-2">
+                            <a
+                                href="https://www.linkedin.com/in/thesachindey"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label="LinkedIn"
+                                className="inline-flex items-center gap-2 text-sm font-medium text-base-content/80 hover:text-blue-600 transition-colors"
+                            >
+                                <FaLinkedin className="text-xl" />
+                                <span>Connect on LinkedIn</span>
+                            </a>
+                        </div>
                     </div>
 
-                    {/* Right Section */}
-                    <div className="w-full md:w-1/2 space-y-6">
-                        <div className="flex gap-4 justify-end text-xl">
-                            <div className="flex gap-4">
-                                {/* LinkedIn */}
-                                <a
-                                    href="https://www.linkedin.com/in/thesachindey"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    aria-label="LinkedIn"
-                                >
-                                    <FaLinkedin className="cursor-pointer hover:text-blue-600 transition-colors text-xl" />
-                                </a>
+                    {/* Column 2: Quick Links (Vertical is cleaner) */}
+                    <div>
+                        <h3 className="font-bold text-lg mb-6 text-base-content">Quick Links</h3>
+                        <ul className="space-y-3 text-sm font-medium text-base-content/70">
+                            <li><Link to={'/'} className="hover:text-primary transition-colors">Home</Link></li>
+                            <li><Link to={'/about-us'} className="hover:text-primary transition-colors">About Us</Link></li>
+                            <li><Link to={'/upcoming-event'} className="hover:text-primary transition-colors">Find Events</Link></li>
+                            <li><Link to={'/create-event'} className="hover:text-primary transition-colors">Organize Event</Link></li>
+                            <li><Link to={'/faq'} className="hover:text-primary transition-colors">FAQ</Link></li>
+                        </ul>
+                    </div>
 
-
-
-                            </div>
-                        </div>
-                        <h6 className="footer-title">Newsletter</h6>
-                        <div className="bg-base-200 p-6 rounded-xl flex flex-col gap-4 md:flex-row md:items-center">
-                            <input
-                                type="email"
-                                placeholder="Email"
-                                className="input input-bordered w-full bg-base-100 text-neutral"
-                            />
-                            <button className="btn bg-primary text-secondary rounded-lg w-full md:w-auto">
-                                Subscribe to news
-                            </button>
-                        </div>
-
+                    {/* Column 3: Contact Info */}
+                    <div>
+                        <h3 className="font-bold text-lg mb-6 text-base-content">Contact Us</h3>
+                        <ul className="space-y-4 text-sm text-base-content/70">
+                            <li className="flex items-start gap-3">
+                                <MapPin className="w-5 h-5 text-primary shrink-0" />
+                                <span>House 12, Road 5, Mirpur DOHS,<br/>Dhaka 1216, Bangladesh</span>
+                            </li>
+                            <li className="flex items-center gap-3">
+                                <Mail className="w-5 h-5 text-primary shrink-0" />
+                                <span>info@serveup.com</span>
+                            </li>
+                            <li className="flex items-center gap-3">
+                                <Phone className="w-5 h-5 text-primary shrink-0" />
+                                <span>+880-1777-000000</span>
+                            </li>
+                        </ul>
                     </div>
                 </div>
 
-                <hr className="border-base-300 my-8" />
+                {/* Divider */}
+                <div className="divider opacity-10"></div>
 
-                <div className="flex justify-between text-xs text-neutral">
-                    <p>© 2025 ServeUp. All Rights Reserved.</p>
+                {/* Bottom Bar */}
+                <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-base-content/60">
+                    <p>© {new Date().getFullYear()} ServeUp. All Rights Reserved.</p>
 
-                    <div className="flex items-center gap-4">
-                        <p className="cursor-pointer hover:underline">Privacy Policy</p>
+                    <div className="flex items-center gap-6">
+                        <Link to="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link>
+                        <Link to="/terms" className="hover:text-primary transition-colors">Terms of Service</Link>
 
                         <a
                             href="https://github.com/thesachindey"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-1 cursor-pointer hover:underline"
+                            className="flex items-center gap-1 hover:text-primary transition-colors font-medium bg-base-200 px-3 py-1 rounded-full"
                         >
-                            Developed by Thesachindey
-                            <Heart size={14} className="text-red-500" />
-                            <Github size={14} />
+                            Dev by Thesachindey
+                            <Heart size={12} className="text-red-500 fill-red-500" />
                         </a>
                     </div>
                 </div>

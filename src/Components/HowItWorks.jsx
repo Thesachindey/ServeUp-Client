@@ -76,7 +76,7 @@ const StepCard = ({ step, index }) => {
         <Icon size={32} strokeWidth={2} />
       </div>
 
-      {/* Step Number Badge */}*/}
+      {/* Step Number Badge */}
       <div className="absolute top-6 right-6 text-6xl font-black text-base-content/5 -z-0 select-none group-hover:text-primary/10 transition-colors">
         0{step.id}
       </div>
