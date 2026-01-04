@@ -44,7 +44,7 @@ const CallToAction = () => {
               <Link to="/upcoming-event" className="btn btn-lg bg-white text-primary hover:bg-base-100 border-none rounded-full px-8 shadow-lg">
                 Find an Event
               </Link>
-              <Link to="/create-event" className="btn btn-lg btn-outline text-white border-white hover:bg-white/20 hover:border-white rounded-full px-8 group">
+              <Link to="/dashboard/create-event" className="btn btn-lg btn-outline text-white border-white hover:bg-white/20 hover:border-white rounded-full px-8 group">
                 Organize Event
                 <ArrowRight className="group-hover:translate-x-1 transition-transform" />
               </Link>

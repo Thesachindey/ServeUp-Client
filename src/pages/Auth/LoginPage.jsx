@@ -1,191 +1,181 @@
-
-import React, { use, useRef, useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router';
-
-import { FaEye } from 'react-icons/fa';
-import { IoEyeOff } from 'react-icons/io5';
+import { FaEye, FaEyeSlash, FaGoogle, FaUserSecret } from 'react-icons/fa';
+import { MdEmail, MdLock } from 'react-icons/md';
+import { IoMdLogIn } from 'react-icons/io';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../provider/AuthProvider';
-import { IoMdLogIn } from 'react-icons/io';
-
-
 
 const LoginPage = () => {
-    const [error, setError] = useState('');
-    const [show, setShow] = useState(false);
+    const { signIn, signInWithGoogleFunc, setUser } = useContext(AuthContext);
 
-
-    const {
-        signIn,
-        signInWithGoogleFunc,
-        sendPasswordResetEmailFunc,
-        user,
-        setUser } = use(AuthContext);
     const location = useLocation();
     const navigate = useNavigate();
-    const emailRef = useRef(null);
+    const fromPath = location.state?.from?.pathname || '/';
 
-    const handelLogIn = (event) => {
-        event.preventDefault();
-        const from = event.target;
-        const email = from.email.value;
-        const password = from.password.value;
-        // console.log({ email, password });
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
+    const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
+
+    const handleLogin = (e) => {
+        e.preventDefault();
+        setError('');
+
+        if (password.length < 6) {
+            setError("Password must be at least 6 characters.");
+            return;
+        }
+
+        setLoading(true);
 
         signIn(email, password)
             .then((result) => {
                 const user = result.user;
-                navigate(`${location.state ? location.state : '/'}`);
+                setLoading(false);
+                toast.success(`Welcome back, ${user.displayName || 'User'}!`);
+                navigate(fromPath, { replace: true });
+            })
+            .catch((err) => {
+                setLoading(false);
+                const errorCode = err.code;
 
-            }).catch((error) => {
-                const errorCode = error.code;
-
-                // Handle different Firebase Auth errors
-                if (errorCode === 'auth/invalid-email') {
-                    setError('Invalid email address. Please check and try again.');
+                if (errorCode === 'auth/invalid-credential') {
+                    setError('Incorrect email or password.');
                 } else if (errorCode === 'auth/user-not-found') {
-                    setError('No user found with this email.');
-                } else if (errorCode === 'auth/wrong-password') {
-                    setError('Incorrect password. Please try again.');
+                    setError('No account found with this email.');
                 } else if (errorCode === 'auth/too-many-requests') {
-                    setError('Too many attempts. Please wait and try later.');
+                    setError('Too many attempts. Try again later.');
                 } else {
-                    setError('Something went wrong. Please try again.');
+                    setError('Login failed. Please try again.');
                 }
-
-
             });
-    }
+    };
 
-    // google signIn
     const handleGoogleSignin = () => {
-
-
-        // signInWithPopup(auth, googleProvider)
         signInWithGoogleFunc()
-            .then((userCredential) => {
-                // Signed in 
-                const user = userCredential.user;
-                navigate(`${location.state ? location.state : '/'}`);
-                setUser(user);
-                toast.success("SignIn completed!!")
-
-
+            .then((result) => {
+                setUser(result.user);
+                toast.success("Signed in with Google!");
+                navigate(fromPath, { replace: true });
             })
-            .catch((error) => {
-                const errorCode = error.code;
-                // const errorMessage = error.message;
-                toast.error(errorCode);
-                console.log(errorCode);
+            .catch((err) => {
+                console.error(err);
+                toast.error("Google Sign-in failed.");
             });
     };
 
-    // forgot pass 
-    const handleForgetPassword = () => {
-        const email = emailRef.current.value;
-
-        
-        if (!email) {
-            toast.error('Please enter your email first!');
-            return;
-        }
-
-        //  Send the password reset email using Firebase
-        sendPasswordResetEmailFunc(email)
-            .then(() => {
-                toast.success('Password reset email sent! Check your inbox.');
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-
-                //  Handle common Firebase errors with friendly messages
-                if (errorCode === 'auth/invalid-email') {
-                    toast.error('Invalid email address.');
-                } else if (errorCode === 'auth/user-not-found') {
-                    toast.error('No account found with this email.');
-                } else if (errorCode === 'auth/missing-email') {
-                    toast.error('Please enter your email before trying again.');
-                } else {
-                    toast.error('Something went wrong. Please try again later.');
-                }
-
-                console.error('Password reset error:', error);
-            });
+    const fillDemoUser = () => {
+        setEmail("user@serveup.com");
+        setPassword("User@serveup1");
+        toast.success("Demo credentials filled!");
     };
-
 
     return (
-        <div>
-            <title>LogIn || ServeUp</title>
-            <div className='flex justify-center items-center min-h-screen'>
-                <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl py-5 border ">
-                    <div className="px-10 space-y-5">
-                        <h2 className='logo-font  text-2xl text-center'>Login your account</h2>
-                        <hr className=' px-10 text-base-300' />
-                    </div>
-                    <form onSubmit={handelLogIn} className="card-body">
-                        <fieldset className="fieldset">
-                            {/* email  */}
-                            <label className="label">Email</label>
-                            <input ref={emailRef} name='email' type="email" className="input" placeholder="Email"
-                                required
-                            />
+        <div className="min-h-screen bg-base-200 flex items-center my-10 rounded-3xl
+         justify-center py-10 px-4">
+            <title>Login || ServeUp</title>
 
-                            {/* Password  */}
+            <div className="card w-full max-w-md bg-base-100 shadow-2xl border border-base-200 overflow-hidden">
+
+                <div className="bg-primary/10 p-8 text-center">
+                    <h2 className="text-3xl font-bold text-base-content logo-font">Welcome Back</h2>
+                    <p className="text-base-content/60 mt-2">Sign in to continue your journey</p>
+                </div>
+
+                <div className="p-8">
+                    <button
+                        onClick={fillDemoUser}
+                        className="btn btn-sm btn-block btn-outline border-dashed border-base-300 text-base-content/60 hover:text-primary hover:border-primary mb-6 normal-case"
+                    >
+                        <FaUserSecret /> Auto-fill Demo User
+                    </button>
+
+                    <form onSubmit={handleLogin} className="space-y-5">
+
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text font-semibold">Email Address</span>
+                            </label>
                             <div className="relative">
-                                <label className="label">Password</label>
+                                <MdEmail className="absolute left-4 top-1/2 -translate-y-1/2 text-base-content/40 text-lg" />
                                 <input
-                                    type={show ? 'text' : 'password'}
-                                    name="password"
-                                    placeholder="••••••••"
-                                    className="input "
+                                    type="email"
+                                    placeholder="Enter your email"
+                                    className="input input-bordered w-full pl-11 focus:input-primary bg-base-200/50"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
                                     required
                                 />
-                                <span
-                                    onClick={() => setShow(!show)}
-                                    className="absolute right-[30px] top-[32px] cursor-pointer z-50"
+                            </div>
+                        </div>
+
+                        <div className="form-control">
+                            <label className="label justify-between">
+                                <span className="label-text font-semibold">Password</span>
+                                <Link to="/auth/forget-password" className="label-text-alt link link-hover text-primary">
+                                    Forgot password?
+                                </Link>
+                            </label>
+                            <div className="relative">
+                                <MdLock className="absolute left-4 top-1/2 -translate-y-1/2 text-base-content/40 text-lg" />
+                                <input
+                                    type={showPassword ? 'text' : 'password'}
+                                    placeholder="••••••••"
+                                    className="input input-bordered w-full pl-11 pr-12 focus:input-primary bg-base-200/50"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    required
+                                />
+                                <button
+                                    type="button"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                    className="absolute right-4 top-1/2 -translate-y-1/2 text-base-content/40 hover:text-base-content cursor-pointer transition-colors"
                                 >
-                                    {show ? <FaEye /> : <IoEyeOff />}
-                                </span>
+                                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                                </button>
                             </div>
-                            <button
-                                className="hover:underline text-start hover:text-green-400 cursor-pointer"
-                                onClick={handleForgetPassword}
-                                type="button"
-                            >
-                                Forget password?
-                            </button>
-                            {
-                                error && <p className='text-red-600 font-semibold mt-2'>{error}</p>
-                            }
+                        </div>
 
-                            <button type='submit' className="btn flex justify-center items-center bg-green-400 hover:bg-green-500 btn-outline text-white border-black mt-4"><IoMdLogIn />Login</button>
-
-                            {/* Divider */}
-                            <div className="flex items-center justify-center gap-2 my-2">
-                                <div className="h-px w-16 bg-black/30"></div>
-                                <span className="text-sm text-black/70">or</span>
-                                <div className="h-px w-16 bg-black/30"></div>
+                        {error && (
+                            <div className="alert alert-error text-sm py-2 rounded-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-5 w-5" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                <span>{error}</span>
                             </div>
+                        )}
 
-                            {/* Google Signin */}
-                            <button
-                                type="submit"
-                                onClick={handleGoogleSignin}
-                                className="flex items-center justify-center gap-3 bg-green-400 text-white px-5 py-2 rounded-lg w-full font-semibold hover:bg-green-500 btn btn-outline border-black transition-colors cursor-pointer"
-                            >
-                                <img
+                        <button
+                            type="submit"
+                            disabled={loading}
+                            className="btn btn-primary w-full text-white text-lg font-medium shadow-lg shadow-primary/30"
+                        >
+                            {loading ? <span className="loading loading-spinner"></span> : <><IoMdLogIn /> Login</>}
+                        </button>
+                    </form>
+
+                    <div className="divider text-base-content/40 my-6">Or continue with</div>
+
+                    <button
+                        onClick={handleGoogleSignin}
+                        className="btn btn-outline w-full border-base-300 hover:bg-base-200 hover:border-base-300 text-base-content flex items-center gap-3"
+                    >
+                          <img
                                     src="https://www.svgrepo.com/show/475656/google-color.svg"
                                     alt="google"
                                     className="w-5 h-5"
                                 />
-                                Continue with Google
-                            </button>
+                        <span>Sign in with Google</span>
+                    </button>
 
-
-                            <p className='font-bold text-center mt-4 '>Dont’t Have An Account ? <Link className='text-green-500' to={'/auth/register'}>Register</Link> </p>
-                        </fieldset>
-                    </form>
+                    <div className="text-center mt-8">
+                        <p className="text-base-content/70">
+                            Don't have an account? {' '}
+                            <Link to="/auth/register" className="link link-primary font-bold no-underline hover:underline">
+                                Create Account
+                            </Link>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>

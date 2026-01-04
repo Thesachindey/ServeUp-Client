@@ -60,14 +60,10 @@ export default function AboutUs() {
     };
 
     return (
-        <div className="w-full  mx-auto mt-16 px-4">
-            {/* Main Container - Uses base-200 for subtle contrast against the main page */}
+        <div className="w-full  mx-auto mt-10 px-4">
             <div className="bg-base-200 rounded-3xl p-6 lg:p-12 border border-base-300 shadow-sm">
-
-                {/* Header Section */}
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
                     <div>
-                        {/* Assuming Momo Trust Display is your header font, otherwise falls back to sans */}
                         <h1 className="text-5xl font-bold mb-2 text-neutral" >
                             About <span className="text-primary logo-font">ServeUp</span>
                         </h1>
@@ -75,11 +71,9 @@ export default function AboutUs() {
                             Connecting communities for social good. Create, join, and track local impact events.
                         </p>
                     </div>
-                    {/* Decorative boomerang icon if you want it here, or just a visual element */}
                     <div className="hidden md:block w-16 h-1 bg-primary rounded-full mb-2"></div>
                 </div>
 
-                {/* Custom Tabs */}
                 <div className="flex flex-wrap gap-2 mb-8 border-b border-base-300 pb-1">
                     {tabs.map((tab) => (
                         <button
@@ -98,7 +92,6 @@ export default function AboutUs() {
                     ))}
                 </div>
 
-                {/* Content Area - Uses base-100 (white/black) to pop against the base-200 container */}
                 <motion.div
                     key={active}
                     initial={{ opacity: 0, y: 10 }}

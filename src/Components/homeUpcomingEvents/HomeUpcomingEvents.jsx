@@ -67,7 +67,7 @@ const HomeUpcomingEvents = () => {
                 <h2 className="logo-font text-2xl font-bold text-neutral/50 mb-4">
                    No <span className="text-primary">events</span> found right now.
                 </h2>
-                <Link to="/create-event" className="btn btn-primary btn-sm rounded-full">
+                <Link to="/dashboard/create-event" className="btn btn-primary btn-sm rounded-full">
                   Create Your Own Event
                 </Link>
               </div>

@@ -44,7 +44,7 @@ const ManageEvents = () => {
             <h2 className=" logo-font text-4xl font-bold">
               No <span className="text-green-500 logo-font">events</span> found.
             </h2>
-            <Link to="/create-event" className='btn btn-outline hover:bg-green-500 hover:text-white' >Create Your Own Events</Link>
+            <Link to="/dashboard/create-event" className='btn btn-outline hover:bg-green-500 hover:text-white' >Create Your Own Events</Link>
           </div>
           :
 

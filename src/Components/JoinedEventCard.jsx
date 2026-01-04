@@ -1,23 +1,23 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { MapPin, CalendarDays, User2, MoveRight } from "lucide-react"; // react-icons alternative
-import { Link, useNavigate } from "react-router";
+import { MapPin, CalendarDays, User, Trash2 } from "lucide-react"; 
+import { useNavigate } from "react-router"; 
 import Swal from "sweetalert2";
-// If you want react-icons instead, tell me — I’ll switch.
 
-const JoinedEventCard = ({ event }) => {
+const JoinedEventCard = ({ event, setEvents }) => {
 
   const navigate = useNavigate();
 
   const handleDelete = () => {
     Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
+      title: "Cancel Registration?",
+      text: "You are about to leave this event. This action cannot be undone.",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, cancel it!",
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, Cancel Registration",
+      cancelButtonText: "Keep Spot"
     }).then((result) => {
       if (result.isConfirmed) {
         fetch(`https://serveup-server.vercel.app/joined-events/${event._id}`, {
@@ -25,111 +25,112 @@ const JoinedEventCard = ({ event }) => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
-
-            Swal.fire({
-              title: "Cancelled!",
-              text: "Your event has been cancelled.",
-              icon: "success",
-            });
-
-            navigate("/upcoming-event");
+            if(data.deletedCount > 0) {
+                Swal.fire({
+                    title: "Cancelled!",
+                    text: "You have successfully left the event.",
+                    icon: "success",
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+                navigate("/upcoming-event"); 
+            }
           })
-          .catch((err) => console.log(err));
+          .catch((err) => {
+              console.error(err);
+              Swal.fire("Error", "Failed to cancel event", "error");
+          });
       }
     });
   };
 
-
-
-
   const {
-    _id,
     title,
-    description,
     eventType,
     thumbnail,
     location,
     eventDate,
     createdBy,
-    userName,
   } = event;
 
   return (
-
     <motion.div
       initial={{ opacity: 0, y: 20, scale: 0.95 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
-      whileHover={{ scale: 1.03 }}
-      className="cursor-pointer"
+      whileHover={{ scale: 1.02 }}
+      className="h-full w-full"
     >
-      <div className="card bg-base-100 w-full h-full shadow-md hover:shadow-xl border border-gray-100 rounded-2xl overflow-hidden transition-all duration-300 relative">
+      <div className="card bg-base-100 w-full h-full shadow-md hover:shadow-xl border border-base-200 dark:border-base-content/10 rounded-2xl overflow-hidden transition-all duration-300 flex flex-col">
 
-        {/* Thumbnail */}
-        <figure className="h-48 w-full overflow-hidden">
+        {/* Thumbnail Section */}
+        <figure className="h-40 sm:h-48 w-full overflow-hidden relative">
           <img
             src={thumbnail}
             alt={title}
             className="w-full h-full object-cover hover:scale-110 transition-all duration-500"
           />
+          {/* Status Badge */}
+          <div className="absolute top-3 right-3">
+             <span className="badge badge-success text-white font-bold shadow-sm flex items-center gap-1">
+                ✓ JOINED
+             </span>
+          </div>
         </figure>
 
-        <div className="card-body space-y-3">
+        {/* Content Body */}
+        <div className="card-body p-4 flex flex-col flex-grow">
 
           {/* Title */}
-          <h2 className="card-title text-xl font-bold">
-            {title} <span className="badge bg-green-400 text-white">Joined</span>
-          </h2>
-
-          {/* Description */}
-
-          <div className="text-sm text-gray-600 relative">
-            <p className="line-clamp-4">
-              {description}
-            </p>
-
-            {description?.length > 130 && (
-              <span className="absolute bottom-0 right-0">
-                ...
-              </span>
-            )}
+          <div className="mb-2">
+             <h2 className="card-title text-base md:text-lg font-bold text-base-content line-clamp-1">
+               {title}
+             </h2>
           </div>
 
-          {/* Event Info */}
-          <div className="flex flex-col gap-2 text-sm mt-3 mb-8 ">
-
-            <div className="flex items-center gap-2 text-green-500 font-medium">
-              <MapPin size={18} />
-              <span>{location}</span>
+          {/* Metadata Info */}
+          <div className="flex flex-col gap-2 text-xs sm:text-sm mt-1 mb-6 text-base-content/70">
+            
+            <div className="flex items-start gap-2">
+              <MapPin size={16} className="text-success shrink-0 mt-0.5" />
+              <span className="truncate w-full">{location || "Location TBD"}</span>
             </div>
 
             {eventDate && (
-              <div className="flex items-center gap-2 text-blue-500">
-                <CalendarDays size={18} />
-                <span>{eventDate}</span>
+              <div className="flex items-center gap-2">
+                <CalendarDays size={16} className="text-primary shrink-0" />
+                <span>{new Date(eventDate).toLocaleDateString()}</span>
               </div>
             )}
 
-            <div className="flex items-center gap-2 text-gray-500">
-              <User2 size={18} />
-              <span>Created By: {createdBy || "Unknown"}</span>
+            <div className="flex items-center gap-2">
+              <User size={16} className="text-secondary shrink-0" />
+              <span className="truncate">Org: {createdBy || "Community"}</span>
             </div>
+
           </div>
 
-          {/* Categories / Tags */}
-          <div className="card-actions justify-between absolute bottom-5 left-3 right-3 ">
-            <div className="badge badge-success  badge-outline py-3 px-4">
+          {/* Footer Actions (Pushed to bottom) */}
+          <div className="card-actions justify-between items-center mt-auto pt-3 border-t border-base-200 dark:border-base-content/10">
+            
+            {/* Category Badge */}
+            <div className="badge badge-ghost badge-sm opacity-80">
               {eventType}
             </div>
-            <button onClick={handleDelete} className="btn btn-sm bg-green-400 hover:bg-green-500 text-white border-0 flex items-center gap-2">
-              Cancel Event
+            
+            {/* Cancel Button */}
+            <button 
+                onClick={handleDelete}
+                className="btn btn-sm btn-outline btn-error hover:text-white flex items-center gap-1 transition-all rounded-lg"
+            >
+              <Trash2 size={14} />
+              <span className="text-xs">Cancel</span>
             </button>
           </div>
+
         </div>
       </div>
     </motion.div>
-
   );
 };
 

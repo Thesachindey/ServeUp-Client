@@ -2,6 +2,7 @@ import React, { use, useEffect, useState } from 'react';
 import { Link, useLoaderData } from 'react-router';
 import JoinedEventCard from '../../Components/JoinedEventCard';
 import { AuthContext } from '../../provider/AuthProvider';
+import LoadingPage from '../LoadingPage/LoadingPage';
 
 const JoinedEvent = () => {
 
@@ -24,7 +25,7 @@ const JoinedEvent = () => {
     }, [user?.email]); // only run when email changes
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <LoadingPage />;
     }
 
 

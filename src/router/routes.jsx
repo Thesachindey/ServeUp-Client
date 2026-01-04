@@ -18,6 +18,11 @@ import ManageEventDetails from "../pages/EventDetails/ManageEventDetails";
 import UpdateEvent from "../pages/UpdateEvent/UpdateEvent";
 import About from "../pages/About/About";
 import FAQ from "../Components/FAQ";
+import ForgetPassword from "../pages/Auth/ForgetPassword";
+import PrivacyPolicy from "../Components/PrivacyPolicy";
+import TermsOfService from "../Components/TermsOfService";
+import DashboardLayout from "../layout/DashboardLayout";
+import DashboardOverview from "../Components/DashboardOverview";
 
 export const router = createBrowserRouter([
     {
@@ -34,15 +39,7 @@ export const router = createBrowserRouter([
                 loader: () => fetch('https://serveup-server.vercel.app/events'),
                 hydrateFallbackElement: <LoadingPage />
             },
-            {
-                path: '/joined-events',
-                element:
-                    <PrivateRoute>
-                        <JoinedEvent />
-                    </PrivateRoute>,
-                // loader: () => fetch('https://serveup-server.vercel.app/joined-events'),
-                // hydrateFallbackElement: <LoadingPage />
-            },
+           
             {
                 path: '/event-details/:id',
                 element: <EventDetails />,
@@ -67,39 +64,22 @@ export const router = createBrowserRouter([
                 loader: ({ params }) => fetch(`https://serveup-server.vercel.app/events/${params.id}`),
                 hydrateFallbackElement: <LoadingPage />
             },
+        
             {
-                path: '/manage-events',
-                element:
-                    <PrivateRoute>
-                        <ManageEvents />
-                    </PrivateRoute>
-                // loader: ({ params }) => fetch(`https://serveup-server.vercel.app/events/${params.id}`),
-                // hydrateFallbackElement: <LoadingPage />
-            },
-
-            {
-                path: '/my-profile',
-                element:
-                    <PrivateRoute>
-                        <MyProfilePage />
-                    </PrivateRoute>,
-
-            },
-            {
-                path: '/create-event',
-                element:
-                    <PrivateRoute>
-                        <CreateEvent />
-                    </PrivateRoute>,
-
-            },
-            {
-                path:'/about-us',
+                path: '/about-us',
                 element: <About />,
             },
             {
-                path:'/faq',
+                path: '/faq',
                 element: <FAQ />,
+            },
+            {
+                path: '/privacy',
+                element: <PrivacyPolicy />,
+            },
+            {
+                path: '/terms',
+                element: <TermsOfService />,
             },
 
             {
@@ -109,6 +89,57 @@ export const router = createBrowserRouter([
             }
         ]
     },
+    {
+        path: "/dashboard",
+        element: <DashboardLayout />,
+        children: [
+             {
+                index: true,
+                element: <DashboardOverview />,
+            },
+           {
+                path: 'my-profile',
+                element: <PrivateRoute>
+                        <MyProfilePage />
+                    </PrivateRoute>,
+                   
+
+            },
+              {
+                path: 'update-profile',
+                element: <PrivateRoute>
+                       <UpdateInfo />
+                    </PrivateRoute>,
+            },
+            {
+                path: 'manage-events',
+                element:
+                    <PrivateRoute>
+                        <ManageEvents />
+                    </PrivateRoute>
+                // loader: ({ params }) => fetch(`https://serveup-server.vercel.app/events/${params.id}`),
+                // hydrateFallbackElement: <LoadingPage />
+            },
+            {
+                path: 'create-event',
+                element:
+                    <PrivateRoute>
+                        <CreateEvent />
+                    </PrivateRoute>,
+
+            },
+             {
+                path: 'joined-events',
+                element:
+                    <PrivateRoute>
+                        <JoinedEvent />
+                    </PrivateRoute>,
+                // loader: () => fetch('https://serveup-server.vercel.app/joined-events'),
+                // hydrateFallbackElement: <LoadingPage />
+            },
+        ]
+    },
+
     {
         path: "/auth",
         element: <AuthLayouts />,
@@ -122,9 +153,10 @@ export const router = createBrowserRouter([
                 element: <RegisterPage />
             },
             {
-                path: '/auth/update-profile',
-                element: <UpdateInfo />
-            }
+                path: "/auth/forget-password",
+                element: <ForgetPassword></ForgetPassword>
+            },
+          
         ]
 
     },

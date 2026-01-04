@@ -65,7 +65,7 @@ const CreateEvent = () => {
 
         if (data.insertedId) {
             toast.success("Event Created Successfully!");
-            navigate("/upcoming-event");
+            navigate("/dashboard/manage-events");
         }
     };
 

@@ -90,7 +90,7 @@ const Banner = () => {
               </motion.button>
             </Link>
 
-            <Link to="/create-event" className="w-full sm:w-auto">
+            <Link to="/dashboard/create-event" className="w-full sm:w-auto">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}

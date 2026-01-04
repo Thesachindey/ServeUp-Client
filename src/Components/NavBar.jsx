@@ -10,6 +10,8 @@ import { IoMdLogIn } from 'react-icons/io';
 import { BiLogOutCircle } from 'react-icons/bi';
 import { Calendar, Home, InfoIcon, ListChecks, PlusCircle, User, UserCheck } from 'lucide-react';
 import Swal from 'sweetalert2';
+import { GrDashboard } from 'react-icons/gr';
+import { MdDashboardCustomize, MdOutlinePolicy } from 'react-icons/md';
 
 
 
@@ -40,17 +42,20 @@ const NavBar = () => {
             <InfoIcon size={18} />
             About Us
         </MyLink>
+        <MyLink
+            to="/privacy"
+            className="flex items-center gap-1 "
+        >
+            <MdOutlinePolicy size={18} />
+            Privacy Policy
+        </MyLink>
 
         {
             user &&
             <>
-                <MyLink to={'/create-event'}>
-                    <PlusCircle className="inline-block w-4 h-4 mr-2" />
-                    Create Event
-                </MyLink>
-                <MyLink to={'/manage-events'}>
-                    <ListChecks className="inline-block w-4 h-4 mr-2" />
-                    Manage Events
+                <MyLink to={'/dashboard'}>
+                    <MdDashboardCustomize className="inline-block w-4 h-4 mr-2" />
+                   Dashboard
                 </MyLink>
             </>
         }
@@ -178,7 +183,7 @@ const NavBar = () => {
                                         className="menu menu-sm dropdown-content bg-base-100 rounded-box border z-100 mt-3 space-y-2 w-52 p-2 shadow"
                                     >
                                         <li>
-                                            <MyLink to={'/my-profile'} className="justify-between">
+                                            <MyLink to={'/dashboard/my-profile'} className="justify-between">
                                                 <span className="flex items-center gap-2">
                                                     <User className="w-4 h-4" />
                                                     My Profile
@@ -188,7 +193,7 @@ const NavBar = () => {
                                         </li>
 
                                         {/* <li>
-                                            <MyLink to={'/create-event'}>
+                                            <MyLink to={'/dashboard/create-event'}>
                                                 <PlusCircle className="inline-block w-4 h-4 mr-2" />
                                                 Create Event
                                             </MyLink>
@@ -201,12 +206,12 @@ const NavBar = () => {
                                             </MyLink>
                                         </li> */}
 
-                                        <li>
+                                        {/* <li>
                                             <MyLink to={'/joined-events'}>
                                                 <UserCheck className="inline-block w-4 h-4 mr-2" />
                                                 Joined Events
                                             </MyLink>
-                                        </li>
+                                        </li> */}
 
                                         <span className="m-3">
                                             <ThemeToggle />
