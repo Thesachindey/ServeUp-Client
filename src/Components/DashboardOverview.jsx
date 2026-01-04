@@ -84,7 +84,7 @@ const DashboardOverview = () => {
             {/* 1. Header Section */}
             <div className="px-1">
                 <h1 className="text-2xl md:text-3xl font-bold text-base-content">
-                    Dashboard Overview
+                    Dashboard <span className='text-primary logo-font'>Overview</span>
                 </h1>
                 <p className="text-sm md:text-base text-base-content/60 mt-1">
                     Welcome back, {user?.displayName}! Here's what's happening with your account.

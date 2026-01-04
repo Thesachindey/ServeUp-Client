@@ -12,6 +12,7 @@ import { LucidePlusCircle } from 'lucide-react';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../provider/AuthProvider';
 import Logo from '../Components/Logo';
+import ThemeToggle from '../Components/ThemeToggle';
 
 const DashboardLayout = () => {
     const { user, logOut } = useContext(AuthContext);
@@ -126,14 +127,21 @@ const DashboardLayout = () => {
                         </ul>
                     </div>
 
-                    <div className="p-4 border-t border-base-200 m-2">
-                        <button 
-                            onClick={handleLogOut}
-                            className="btn btn-outline btn-error w-full flex items-center justify-center gap-2"
-                        >
-                            <LuLogOut className="text-xl" /> Logout
-                        </button>
-                    </div>
+                    <div className="p-4 border-t border-base-200 m-2 flex gap-3 items-center">
+    
+    <button 
+        onClick={handleLogOut}
+        className="btn btn-outline btn-error flex-1 flex items-center justify-center gap-2 shadow-sm"
+    >
+        <LuLogOut className="text-lg" /> 
+        <span>Logout</span>
+    </button> 
+
+    <div className="h-12 w-12 flex items-center justify-center rounded-lg border border-base-content/20 bg-base-100 hover:bg-base-200 transition-colors">
+        <ThemeToggle />
+    </div>
+
+</div>
                 </aside>
             </div>
         </div>

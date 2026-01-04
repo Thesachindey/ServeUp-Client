@@ -5,12 +5,10 @@ import Container from './Container';
 import { motion, MotionConfig } from 'framer-motion';
 import { use } from 'react';
 import { AuthContext } from '../provider/AuthProvider';
-import toast from 'react-hot-toast';
 import { IoMdLogIn } from 'react-icons/io';
 import { BiLogOutCircle } from 'react-icons/bi';
 import { Calendar, Home, InfoIcon, ListChecks, PlusCircle, User, UserCheck } from 'lucide-react';
 import Swal from 'sweetalert2';
-import { GrDashboard } from 'react-icons/gr';
 import { MdDashboardCustomize, MdOutlinePolicy } from 'react-icons/md';
 
 
