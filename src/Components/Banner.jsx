@@ -29,14 +29,11 @@ const Banner = () => {
 
       <div className="hero-content flex-col lg:flex-row-reverse gap-8 lg:gap-16 relative z-10 w-full max-w-7xl mx-auto px-0">
 
-        {/* ======================
-              RIGHT SIDE GRID (Images)
-        ======================= */}
+        
         <motion.div
           initial={{ opacity: 0, scale: 0.85 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8 }}
-          // RESPONSIVE FIX: 2 columns on mobile, 3 on larger screens
           className="grid grid-cols-2 sm:grid-cols-3 gap-3 md:gap-4"
         >
           {images.map((img, index) => (
@@ -46,7 +43,6 @@ const Banner = () => {
               whileHover={{ scale: 1.06 }}
               transition={{ type: "spring", stiffness: 200 }}
             >
-              {/* RESPONSIVE FIX: Smaller images on mobile (w-28) to fit screen */}
               <img
                 src={img}
                 alt={`Impact ${index}`}
@@ -56,9 +52,6 @@ const Banner = () => {
           ))}
         </motion.div>
 
-        {/* ======================
-              LEFT SIDE TEXT
-        ======================= */}
         <motion.div
           initial={{ x: -60, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
@@ -77,10 +70,9 @@ const Banner = () => {
             campaigns, and community marathons.
           </p>
 
-          {/* Buttons - Stack vertically on very small screens, row on others */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mt-4 w-full sm:w-auto">
 
-            <Link to="/events" className="w-full sm:w-auto">
+            <Link to="/upcoming-event" className="w-full sm:w-auto">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
