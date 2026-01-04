@@ -34,7 +34,7 @@ const ManageEventDetails = () => {
                             icon: "success",
                         });
 
-                        navigate("/manage-events");
+                        navigate("/dashboard/manage-events");
                     })
                     .catch((err) => console.log(err));
             }
