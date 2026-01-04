@@ -95,7 +95,9 @@ export const router = createBrowserRouter([
         children: [
              {
                 index: true,
-                element: <DashboardOverview />,
+                element:<PrivateRoute>
+                         <DashboardOverview />
+                    </PrivateRoute>,
             },
            {
                 path: 'my-profile',
